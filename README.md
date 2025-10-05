@@ -15,7 +15,7 @@ Desenvolver uma aplicação completa para controle de vagas, entrada/saída de v
 
 ## Equipe
 - João Costa
-- Gabriel Mendes
+- Gabriel Sobral
 - Marco Antônio
 - Maria Juciele
 - Nathaly Silva
