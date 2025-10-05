@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 // @Id
 // @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-@Data // Gera automaticamente getters, setters, equals, hashCode e toString
-@AllArgsConstructor // Gera construtor com todos os campos
-@NoArgsConstructor  // Gera construtor vazio
+@Data
+@AllArgsConstructor 
+@NoArgsConstructor  
 
 public class Cliente {
 
