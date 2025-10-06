@@ -13,9 +13,9 @@ public class ClienteService {
     private List<Cliente> clientes = new ArrayList<>();
 
     public ClienteService() {
-        clientes.add(new Cliente(1L, "João Costa", "joao@email.com", "(11)11111-1111", 50.0));
-        clientes.add(new Cliente(2L, "Gabriel Sobral", "maria@email.com", "(11)11111-1111", 75.0));
-    }
+    clientes.add(new Cliente(1L, "João Costa", "joao@email.com", "(11)11111-1111", 50.0, null));
+    clientes.add(new Cliente(2L, "Gabriel Sobral", "maria@email.com", "(11)11111-1111", 75.0, null));
+}
 
     public List<Cliente> listarClientes() {
         return clientes;
