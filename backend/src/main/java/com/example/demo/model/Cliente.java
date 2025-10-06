@@ -23,12 +23,4 @@ public class Cliente {
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Veiculo> veiculos;
-
-    public Cliente(Long id, String nome, String email, String telefone, Double saldo) {
-        this.id = id;
-        this.nome = nome;
-        this.email = email;
-        this.telefone = telefone;
-        this.saldo = saldo;
-    }
 }

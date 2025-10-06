@@ -17,3 +17,5 @@ public class VeiculoService {
         return veiculos;
     }
 }
+
+veiculos.add(new Veiculo(1L, "CRI-2578", "Vectra", "Laranja", true, null));
