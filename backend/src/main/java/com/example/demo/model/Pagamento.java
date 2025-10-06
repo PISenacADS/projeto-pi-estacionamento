@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "pagamentos") 
 public class Pagamento {
 
     @Id
@@ -20,14 +21,18 @@ public class Pagamento {
     @Column(nullable = false)
     private String placaVeiculo;
 
-    @Column(nullable = false)
+    @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal valor;
 
+    @Column(length = 50)
     private String formaPagamento; // Ex: "Cartão", "Dinheiro"
+
+    @Column(length = 20)
     private String status; // Ex: "Pendente", "Pago"
+
     private LocalDateTime dataPagamento;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cliente_id", nullable = false)
     private Cliente cliente;
 }
