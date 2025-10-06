@@ -4,12 +4,14 @@ import { UsuarioComponent } from './features/admin/usuario/usuario.component';
 import { FinanceiroComponent } from './features/admin/financeiro/financeiro.component';
 import { AutomovelComponent } from './features/admin/automovel/automovel.component';
 import { AdminLayoutComponent } from './core/features/admin/admin-layout/admin-layout.component';
+import { CadastroComponent } from './features/admin/cadastro/cadastro.component';
 
 export const routes: Routes = [
     {
     path: 'admin',
     component: AdminLayoutComponent,
     children: [
+      { path: 'cadastro', component: CadastroComponent },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'usuario', component: UsuarioComponent },
       { path: 'financeiro', component: FinanceiroComponent },
