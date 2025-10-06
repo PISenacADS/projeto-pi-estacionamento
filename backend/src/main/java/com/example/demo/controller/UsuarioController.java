@@ -8,7 +8,7 @@ import com.example.demo.model.Usuario;
 import com.example.demo.service.UsuarioService;
 
 @RestController
-@RequestMapping("/usuarios")
+@RequestMapping("/api/usuarios")
 public class UsuarioController {
 
     @Autowired
