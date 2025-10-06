@@ -1,18 +1,14 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Cliente {
 
@@ -25,6 +21,14 @@ public class Cliente {
     private String telefone;
     private Double saldo = 0.0;
 
-    @OneToMany(mappedBy = "cliente")
-    private List<Pagamento> pagamentos;
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    private List<Veiculo> veiculos;
+
+    public Cliente(Long id, String nome, String email, String telefone, Double saldo) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.telefone = telefone;
+        this.saldo = saldo;
+    }
 }
