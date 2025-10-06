@@ -1,11 +1,7 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import lombok.Data;
 import lombok.AllArgsConstructor;
@@ -16,17 +12,22 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 public class Pagamento {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
     private String placaVeiculo;
-    private Double valor;
+
+    @Column(nullable = false)
+    private BigDecimal valor;
+
     private String formaPagamento; // Ex: "Cartão", "Dinheiro"
-    private String Status; // Ex: "Pendente", "Pago"
+    private String status; // Ex: "Pendente", "Pago"
     private LocalDateTime dataPagamento;
 
-    // Relacionamento com o cliente
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "cliente_id", nullable = false)
     private Cliente cliente;
 }
