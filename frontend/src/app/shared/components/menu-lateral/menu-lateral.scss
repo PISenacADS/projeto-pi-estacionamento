@@ -11,6 +11,15 @@
   font-family: 'Roboto', sans-serif;
 }
 
+.icon {
+  width: 24px; 
+  height: 24px; 
+  margin-right: 15px; 
+  color: black;
+  filter: invert(100%);
+  transition: filter 0.3s ease;
+}
+
 .logo img {
   margin-top: 2%;
   width: 265px; 
@@ -34,6 +43,7 @@
   transition: background-color 0.3s;
   font-size: 22px;
   border: solid 2px #7d47db;
+  background-color: #D2B9FE;
 }
 
 .menu-list li a:hover {
@@ -41,8 +51,17 @@
   color: white;
 }
 
+.icon li a:hover {
+  filter: invert(0%);
+}
+
+.menu-list li a:hover .icon,
+.menu-list li a.active .icon {
+  filter: invert(0%);
+  color: white;
+}
 .menu-list li a.active {
-  background-color: #7a5ba6; 
+  background-color: #5e1abd; 
   color: white;
 }
 
