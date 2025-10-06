@@ -18,27 +18,30 @@ public class FinanceiroService {
     public Double calcularReceitaHoje() {
         LocalDateTime inicio = LocalDate.now().atStartOfDay();
         LocalDateTime fim = LocalDate.now().atTime(23, 59, 59);
+
         return pagamentoRepository.findByDataPagamentoBetween(inicio, fim)
                 .stream()
-                .mapToDouble(Pagamento::getValor)
+                .mapToDouble(p -> p.getValor().doubleValue())
                 .sum();
     }
 
     public Double calcularReceitaSemanal() {
         LocalDateTime inicio = LocalDate.now().minusDays(7).atStartOfDay();
         LocalDateTime fim = LocalDate.now().atTime(23, 59, 59);
+
         return pagamentoRepository.findByDataPagamentoBetween(inicio, fim)
                 .stream()
-                .mapToDouble(Pagamento::getValor)
+                .mapToDouble(p -> p.getValor().doubleValue())
                 .sum();
     }
 
     public Double calcularReceitaMensal() {
         LocalDateTime inicio = LocalDate.now().minusDays(30).atStartOfDay();
         LocalDateTime fim = LocalDate.now().atTime(23, 59, 59);
+
         return pagamentoRepository.findByDataPagamentoBetween(inicio, fim)
                 .stream()
-                .mapToDouble(Pagamento::getValor)
+                .mapToDouble(p -> p.getValor().doubleValue())
                 .sum();
     }
 
