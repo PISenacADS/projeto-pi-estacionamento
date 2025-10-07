@@ -1,27 +1,31 @@
-<div class="user-header">
+<div class="container">
+  <div class="header">
+    <h1>Usuários</h1>
+    <button class="add-button" routerLink="/admin/cadastro">Adicionar</button>
+  </div>
 
-    <div class="content-wrapper">
+  <table class="user-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>CPF</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let usuario of usuarios">
+        <td>{{ usuario.id }}</td>
+        <td>{{ usuario.nome }}</td>
+        <td>{{ usuario.email }}</td>
+        <td>{{ usuario.cpf }}</td>
+       
+      </tr>
+    </tbody>
+  </table>
 
-        <div class="top-row">
-            <h1>Usuários</h1>
-            <button class="add-user-btn">Adicionar Usuário</button>
-        </div>
-
-       <div class="search-container">
-  <img src="assets/icons/lupa.png" alt="Ícone de busca" class="search-icon">
-  
-  <input type="search" class="search-input" placeholder="Busca">
-</div>
-
-
-
-<ul class="dados">
-    <li>Nome</li>
-    <li>Celular</li>
-    <li>Saldo</li>
-    <li>Status</li>
-    <li>Ação</li>
-</ul>
-
-    </div>
+  <div *ngIf="usuarios.length === 0" class="empty-state">
+    <p>Nenhum usuário encontrado.</p>
+  </div>
 </div>
