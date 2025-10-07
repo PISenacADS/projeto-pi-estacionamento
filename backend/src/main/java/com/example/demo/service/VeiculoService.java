@@ -15,7 +15,6 @@ public class VeiculoService {
     veiculos.add(new Veiculo(2L, "XYZ-1234", "Civic", "Preto", false,null));
     veiculos.add(new Veiculo(3L, "GHI-7777", "Corolla", "Branco", true,null));
 }
-    
 
     public List<Veiculo> listarVeiculos() {
         return veiculos;
