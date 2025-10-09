@@ -8,6 +8,6 @@ import { RouterModule } from '@angular/router';
   templateUrl: './side-bar.html',
   styleUrl: './side-bar.scss'
 })
-export class MenuLateral {
+export class MenuLateralComponent {
 
 }
