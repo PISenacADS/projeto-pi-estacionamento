@@ -5,21 +5,12 @@ import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-usuario',
-<<<<<<< HEAD
+  standalone: true,
   imports: [CommonModule,RouterModule],
   templateUrl: './usuario.component.html',
   styleUrl: './usuario.component.scss'
 })
 
-
-=======
-  standalone: true,
-  imports: [CommonModule, RouterModule ],
-  templateUrl: './usuario.component.html',
-  styleUrls: ['./usuario.component.scss']
-})
-
->>>>>>> 99334a2e08881ce10b83435577a89f26fbe7d4d0
 export class UsuarioComponent implements OnInit {
 
   public usuarios: Usuario[] = [];
