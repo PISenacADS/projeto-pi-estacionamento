@@ -1,7 +1,8 @@
-<div class="container">
-  <div class="header">
+<div class="content-wrapper">
+
+  <div class="top-row">
     <h1>Usuários</h1>
-    <button class="add-button" routerLink="/admin/cadastro">Adicionar</button>
+    <button class="add-user-btn" routerLink="/admin/cadastro">Adicionar</button>
   </div>
 
   <table class="user-table">
@@ -20,12 +21,13 @@
         <td>{{ usuario.nome }}</td>
         <td>{{ usuario.email }}</td>
         <td>{{ usuario.cpf }}</td>
-       
+        <td>
+          </td>
       </tr>
     </tbody>
   </table>
 
-  <div *ngIf="usuarios.length === 0" class="empty-state">
+  <div *ngIf="!usuarios || usuarios.length === 0" class="empty-state">
     <p>Nenhum usuário encontrado.</p>
   </div>
 </div>
