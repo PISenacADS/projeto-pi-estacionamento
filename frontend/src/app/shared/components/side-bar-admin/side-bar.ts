@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-menu-lateral',
+  selector: 'app-side-bar',
   standalone: true,
   imports: [RouterModule],
-  templateUrl: './menu-lateral.html',
-  styleUrl: './menu-lateral.scss'
+  templateUrl: './side-bar.html',
+  styleUrl: './side-bar.scss'
 })
 export class MenuLateral {
 

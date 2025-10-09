@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-import { DashboardComponent } from './features/admin/dashboard/dashboard.component';
-import { UsuarioComponent } from './features/admin/usuario/usuario.component';
-import { FinanceiroComponent } from './features/admin/financeiro/financeiro.component';
-import { AutomovelComponent } from './features/admin/automovel/automovel.component';
-import { AdminLayoutComponent } from './core/features/admin/admin-layout/admin-layout.component';
-import { CadastroComponent } from './features/admin/cadastro/cadastro.component';
+import { DashboardComponent } from './features/admin/pages/dashboard/dashboard.component';
+import { UsuarioComponent } from './features/admin/pages/usuario/usuario.component';
+import { FinanceiroComponent } from './features/admin/pages/financeiro/financeiro.component';
+import { AutomovelComponent } from './features/admin/pages/automovel/automovel.component';
+import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout/admin-layout.component';
+import { CadastroComponent } from './features/admin/pages/cadastro/cadastro.component';
 
 export const routes: Routes = [
     {

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { MenuLateral } from '../../../../shared/components/menu-lateral/menu-lateral';
+import { MenuLateral } from '../../../shared/components/side-bar-admin/side-bar';
 
 @Component({
   selector: 'app-admin-layout',
