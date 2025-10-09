@@ -32,7 +32,7 @@ public class VeiculoService {
         veiculos.add(veiculo);
         return veiculo;
     }
-
+//Lembrar de tentar testar este ultimo metodo depois
     public Veiculo atualizarVeiculo(Long id, Veiculo veiculoAtualizado) {
         Veiculo veiculoExistente = buscarPorId(id);
         if (veiculoExistente != null) {
@@ -44,7 +44,7 @@ public class VeiculoService {
         }
         return null;
     }
-//Lembrar de tentar testar este ultimo metodo
+
     public boolean removerVeiculo(Long id) {
         return veiculos.removeIf(v -> v.getId().equals(id));
     }
