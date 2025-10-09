@@ -10,11 +10,7 @@ import { RouterModule } from '@angular/router';
   styleUrl: './usuario.component.scss'
 })
 
-@Component({
-  selector: 'app-usuario',
-  templateUrl: './usuario.component.html',
-  styleUrls: ['./usuario.component.scss']
-})
+
 export class UsuarioComponent implements OnInit {
 
   public usuarios: Usuario[] = [];
