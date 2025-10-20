@@ -1,1 +1,56 @@
-<p>login works!</p>
+<div class="container">
+  <div class="login-card">
+    <div class="user-icon-placeholder">
+      <span class="material-icons">person</span>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <div class="input-group">
+        <label for="email">E-mail</label>
+        <div class="input-field">
+          <span class="material-icons">mail_outline</span>
+          <input
+            type="email"
+            formControlName="email"
+            placeholder=""
+          />
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="senha">Senha</label>
+        <div class="input-field">
+          <span class="material-icons">lock</span>
+          <input
+            type="password"
+            formControlName="senha"
+            placeholder=""
+          />
+        </div>
+      </div>
+
+      <div class="options">
+        <label class="remember">
+          <input type="checkbox" formControlName="lembrar" />
+          Lembrar-me
+        </label>
+        <a href="#" class="forgot-link">Esqueceu a senha?</a>
+      </div>
+
+      <div class="button-group">
+        <button type="submit" class="btn btn-login">
+          <span class="material-icons">directions_car</span>
+          Entrar
+        </button>
+
+        <button type="button" class="btn btn-register" (click)="onRegister()">
+          <span class="icon-car-key">
+            <span class="material-icons icon-base">directions_car</span>
+            <span class="material-icons icon-overlay">key</span>
+          </span>
+          Cadastrar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

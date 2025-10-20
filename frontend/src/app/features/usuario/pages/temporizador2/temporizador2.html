@@ -1,1 +1,27 @@
-<p>temporizador2 works!</p>
+<div class="container">
+    <header class="logo"></header>
+
+    <h1 class="status-message">{{ mensagemStatus }}</h1>
+
+    <div class="timer-circle-container">
+        <svg class="timer-ring" viewBox="0 0 100 100">
+            <defs>
+                <linearGradient id="gradiente-timer" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#FFA733" />
+                    <stop offset="50%" stop-color="#E94C89" />
+                    <stop offset="100%" stop-color="#6C30C5" />
+                </linearGradient>
+            </defs>
+            <circle class="timer-bg" cx="50" cy="50" r="45"></circle>
+            <circle class="timer-progress" cx="50" cy="50" r="45"></circle>
+        </svg>
+
+        <div class="timer-time" id="timer-display">{{ tempoExibido }}</div>
+    </div>
+
+    <p class="descanso">DESCANSANDO...</p>
+
+    <button class="btn-prolongar" (click)="prolongarTempo()">
+        {{ textoBotao }}
+    </button>
+</div>

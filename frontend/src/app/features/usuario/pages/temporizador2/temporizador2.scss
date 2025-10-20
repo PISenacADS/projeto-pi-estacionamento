@@ -1,0 +1,188 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+:root {
+    --cor-fundo: #f2e9f7;
+    --cor-primaria: #FFA733; 
+    --cor-secundaria: #6C30C5; 
+    --cor-texto-principal: #E94C89; 
+    --cor-texto-secundario: #6C30C5;
+}
+
+
+.container {
+    text-align: center;  
+}
+
+.logo {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 30px;
+}
+
+.vaguou-text {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: var(--cor-texto-secundario);
+}
+
+.status-message {
+    color: var(--cor-texto-principal);
+    font-size: 1.2em;
+    font-weight: 700;
+    margin-bottom: 40px;
+}
+
+.descanso {
+    color: var(--cor-texto-principal);
+    font-size: 1.1em;
+    font-weight: 700;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+
+
+.timer-circle-container {
+    position: relative;
+    width: 250px; 
+    height: 250px;
+    margin: 0 auto;
+    overflow: visible; 
+}
+
+
+@keyframes girar-circulo {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.timer-ring {
+    width: 100%;
+    height: 100%;
+   
+    transform: rotate(-90deg); 
+    
+    animation: girar-circulo 5s linear infinite; 
+}
+
+.timer-bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.5); 
+    stroke-width: 5; 
+}
+
+.timer-progress {
+    fill: none;
+    stroke: url(#gradiente-timer);
+    stroke-width: 10;
+    stroke-linecap: round; 
+    stroke-dasharray: 283; 
+    stroke-dashoffset: 0; 
+  
+    filter: none; 
+}
+
+/*
+.timer-time {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.5em;
+    font-weight: 700;
+    z-index: 2;
+    
+    background: linear-gradient(to top, var(--cor-primaria), var(--cor-texto-principal));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: var(--cor-secundaria); 
+}
+*/
+
+.timer-time {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2.5em;
+  font-weight: 700;
+  z-index: 3;
+  
+  background: var(--gradiente-principal);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  color: var(--cor-texto-principal); 
+}
+
+
+.btn-prolongar {
+    background: linear-gradient(to right, var(--cor-secundaria), var(--cor-texto-principal)); 
+    color: var(--cor-primaria);
+    border: none;
+    border-radius: 50px; 
+    padding: 12px 30px;
+    font-size: 1.1em;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-prolongar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+:host {
+  --gradiente-principal: linear-gradient(to right, #FFA733, #E94C89, #6C30C5);
+  --cor-fundo: #f2e9f7;
+  --cor-texto-principal: #E94C89;
+  --cor-texto-secundario: #6C30C5;
+}
+
+.container {
+  text-align: center;
+}
+
+.status-message,
+.descanso {
+  font-weight: 700;
+  background: var(--gradiente-principal);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--cor-texto-principal);
+}
+
+.status-message {
+  font-size: 1.2em;
+  margin-bottom: 40px;
+}
+
+.descanso {
+  font-size: 1.1em;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.btn-prolongar {
+  background: var(--gradiente-principal);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 30px;
+  font-size: 1.1em;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-prolongar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}

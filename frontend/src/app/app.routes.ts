@@ -13,6 +13,7 @@ import { ReservaComponent } from './features/usuario/pages/reserva/reserva';
 import { TemporizadorComponent } from './features/usuario/pages/temporizador/temporizador';
 import { Temporizador2Component } from './features/usuario/pages/temporizador2/temporizador2';
 import { VeiculosComponent } from './features/usuario/pages/veiculos/veiculos';
+import { CadastroComponente } from './features/usuario/pages/cadastro/cadastro';
 
 export const routes: Routes = [
     {
@@ -32,7 +33,7 @@ export const routes: Routes = [
     path: 'usuario',
     component: UsuarioLayoutComponent,
     children: [
-      { path: 'cadastro', component: CadastroComponent },
+      { path: 'cadastro', component: CadastroComponente },
       { path: 'home', component: HomeComponent },
       { path: 'login', component: LoginComponent },
       { path: 'perfil', component: PerfilComponent },
