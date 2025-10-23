@@ -1,1 +1,35 @@
-<p>temporizador works!</p>
+<div class="container">
+
+    <div class="left">
+        <h1>Temporizador</h1>
+
+        <div class="timer-circle-container">
+            <svg class="timer-ring" viewBox="0 0 100 100">
+                <defs>
+                    <linearGradient id="gradiente-timer" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#FFB347" />
+                        <stop offset="50%" stop-color="#E94C89" />
+                        <stop offset="100%" stop-color="#6C30C5" />
+                    </linearGradient>
+                </defs>
+                <circle class="timer-bg" cx="50" cy="50" r="45"></circle>
+                <circle class="timer-progress" cx="50" cy="50" r="45"></circle>
+            </svg>
+            <div class="timer-time">{{ tempoExibido }}</div>
+            <p class="timer-text">{{ textoAte }}</p>
+        </div>
+
+        <button class="btn btn-prolongar" (click)="prolongarTempo()">
+            {{ textoBotao }}
+        </button>
+    </div>
+
+    <div class="right">
+        <h2>VEÍCULO</h2>
+        <p><strong>Placa:</strong> {{ detalhesVeiculo.placa }}</p>
+        <p><strong>Tempo:</strong> {{ detalhesVeiculo.tempo }}</p>
+        <p><strong>Data/Hora:</strong> {{ detalhesVeiculo.dataHora }}</p>
+        <p><strong>Autorização:</strong> {{ detalhesVeiculo.autorizacao }}</p>
+        <p><strong>Localidade:</strong> {{ detalhesVeiculo.localidade }}</p>
+    </div>
+</div>
