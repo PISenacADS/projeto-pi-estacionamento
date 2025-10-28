@@ -18,7 +18,7 @@ export class Temporizador2Component implements OnInit {
 
   ngOnInit(): void {
 
-    this.tempoExibido = "03:13";
+    this.tempoExibido = "03:17";
   }
 
   prolongarTempo(): void {
