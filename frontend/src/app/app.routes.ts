@@ -14,6 +14,7 @@ import { TemporizadorComponent } from './features/usuario/pages/temporizador/tem
 import { Temporizador2Component } from './features/usuario/pages/temporizador2/temporizador2';
 import { VeiculosComponent } from './features/usuario/pages/veiculos/veiculos';
 import { CadastroComponente } from './features/usuario/pages/cadastro/cadastro';
+import { PadraoLayout } from './layouts/admin-layout/padrao-layout/padrao-layout';
 
 export const routes: Routes = [
     {
@@ -32,10 +33,8 @@ export const routes: Routes = [
    {
     path: 'usuario',
     component: UsuarioLayoutComponent,
-    children: [
-      { path: 'cadastro', component: CadastroComponente },
+    children: [     
       { path: 'home', component: HomeComponent },
-      { path: 'login', component: LoginComponent },
       { path: 'perfil', component: PerfilComponent },
       { path: 'reserva', component: ReservaComponent },
       { path: 'temporizador', component: TemporizadorComponent},
@@ -44,6 +43,15 @@ export const routes: Routes = [
       { path: '', redirectTo: 'Home', pathMatch: 'full' }
     ]
   },
+    {
+      path: 'padrao',
+      component: PadraoLayout,
+      children: [
+          { path: 'cadastro', component: CadastroComponente },
+          { path: 'login', component: LoginComponent },
+        
+      ]
+    }
 
   // { path: '', redirectTo: '/admin/dashboard', pathMatch: 'full' },
   // { path: '**', redirectTo: '/admin/dashboard' }
