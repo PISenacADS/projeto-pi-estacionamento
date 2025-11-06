@@ -1,78 +1,58 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil do Cliente</title>
-    <link rel="stylesheet" href="Telacliente.CSS">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-</head>
-<body>
-    <div class="container" id="app">
-        
-        <div class="header-block">
-            <div class="balance">R$ 25,00</div>
-            <div class="user-info">
-                <div class="user-icon-container">
-                    <i class="fa-solid fa-user"></i>
-                </div>
-                <p>Olá, Fulano</p>
-            </div>
-        </div>
+<div class="container">
+  
+  <div class="header-block">
+      <div class="balance">{{ balance | currency:'BRL' }}</div>
+      <div class="user-info">
+          <div class="user-icon-container">
+              <i class="fa-solid fa-user"></i>
+          </div>
+          <p>Olá, {{ user.nome }}</p>
+      </div>
+  </div>
 
-        <div class="info-block">
-            <h2>Informações Pessoais</h2>
-            <div class="personal-details">
-                <div class="input-group">
-                    <input type="text" id="nome" value="Nome: Fulano" readonly>
-                </div>
-                <div class="input-group">
-                    <input type="text" id="sobrenome" value="Sobrenome: Silva" readonly>
-                </div>
-                <div class="input-group">
-                    <input type="email" id="email" value="Email: Fulano@gmail.com" readonly>
-                </div>
-                <div class="input-group">
-                    <input type="tel" id="telefone" value="Telefone: (11) 9374-23654" readonly>
-                </div>
-            </div>
-        </div>
+  <div class="info-block">
+      <h2>Informações Pessoais</h2>
+      <div class="personal-details">
+          <div class="input-group">
+              <input type="text" id="nome" [value]="'Nome: ' + user.nome" readonly>
+          </div>
+          <div class="input-group">
+              <input type="text" id="sobrenome" [value]="'Sobrenome: ' + user.sobrenome" readonly>
+          </div>
+          <div class="input-group">
+              <input type="email" id="email" [value]="'Email: ' + user.email" readonly>
+          </div>
+          <div class="input-group">
+              <input type="tel" id="telefone" [value]="'Telefone: ' + user.telefone" readonly>
+          </div>
+      </div>
+  </div>
 
-        <div class="info-block">
-            <h2>Meus Veículos</h2>
-            
-            <div class="vehicle-item active">
-               <img src="carro-amarelo.png" alt="Carro Amarelo" class="car-image">
-                <div class="vehicle-details">
-                    <p class="license-plate">Placa: ABC - 1234</p>
-                    <p class="model">Modelo: Chevrolet Onix</p>
-                </div>
-                <div class="status-badge active-status">
-                    <i class="fa-solid fa-circle-check"></i>
-                    <span>Ativo</span>
-                </div>
-            </div>
-            
-            <div class="vehicle-item inactive">
-               <img src="carro-amarelo.png" alt="Carro Amarelo" class="car-image">
-                <div class="vehicle-details">
-                    <p class="license-plate">Placa: ABC - 1234</p>
-                    <p class="model">Modelo: Chevrolet Onix</p>
-                </div>
-                <div class="status-badge inactive-status">
-                    <i class="fa-solid fa-circle-xmark"></i>
-                    <span>Inativo</span>
-                </div>
-            </div>
+  <div class="info-block">
+      <h2>Meus Veículos</h2>
+      
+      <div *ngFor="let vehicle of vehicles" 
+           class="vehicle-item" 
+           [ngClass]="{ 'active': vehicle.ativo, 'inactive': !vehicle.ativo }">
+          
+           <img [src]="vehicle.imagem" alt="Imagem do Veículo" class="car-image">
+           <div class="vehicle-details">
+               <p class="license-plate">Placa: {{ vehicle.placa }}</p>
+               <p class="model">Modelo: {{ vehicle.modelo }}</p>
+           </div>
+           
+           <div *ngIf="vehicle.ativo" class="status-badge active-status">
+               <i class="fa-solid fa-circle-check"></i>
+               <span>Ativo</span>
+           </div>
+           <div *ngIf="!vehicle.ativo" class="status-badge inactive-status">
+               <i class="fa-solid fa-circle-xmark"></i>
+               <span>Inativo</span>
+           </div>
+      </div>
 
-            <div class="button-container">
-                <button class="add-vehicle-button">Adicionar Novo Veículo</button>
-            </div>
-
-        </div>
-    </div>
-    
-    <script src="Telacliente.js"></script> 
-</body>
-</html>
+      <div class="button-container">
+          <button class="add-vehicle-button">Adicionar Novo Veículo</button>
+      </div>
+  </div>
+</div>

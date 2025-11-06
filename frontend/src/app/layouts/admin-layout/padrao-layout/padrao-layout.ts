@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { MenuLateralComponent } from "../../../shared/components/side-bar-admin/side-bar";
+import { SideBarPadrao } from '../../../shared/components/side-bar-padrao/side-bar-padrao';
 
 @Component({
   selector: 'app-padrao-layout',
   standalone: true,
-  imports: [RouterModule, MenuLateralComponent],
+  imports: [RouterModule, SideBarPadrao],
   templateUrl: './padrao-layout.html',
   styleUrl: './padrao-layout.scss'
 })
