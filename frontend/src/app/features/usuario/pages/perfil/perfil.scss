@@ -1,3 +1,4 @@
+
 :root {
     --primary-bg-color: #DAD6F6; /* Fundo principal (lilás suave) */
     --header-bg-color: #E3ECF9; /* Fundo do topo (cinza/azul muito claro) */
@@ -12,6 +13,18 @@
     --shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
 }
 
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--primary-bg-color);
+    margin: 0;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    
+}
+
 .container {
     max-width: 854px;
     width: 100%;
@@ -19,6 +32,7 @@
    
 }
 
+/* --- Blocos (Topo, Pessoais, Veículos) --- */
 .header-block, .info-block {
     background-color: var(--block-bg-color);
     padding: 20px;
