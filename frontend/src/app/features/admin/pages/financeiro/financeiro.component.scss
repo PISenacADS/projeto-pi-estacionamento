@@ -1,0 +1,135 @@
+:host {
+  display: block;
+  padding: 24px;
+  background-color: #f4f7fa; // Cor de fundo suave
+}
+
+h1, h3 {
+  font-family: 'Arial', sans-serif; // Use a fonte do seu projeto
+  font-weight: bold;
+}
+
+// Layout principal do Dashboard
+.dashboard-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); // 4 colunas
+  grid-gap: 20px;
+
+  // Título ocupa as 4 colunas
+  h1 {
+    grid-column: 1 / -1;
+    margin-bottom: 0;
+  }
+
+  // Cards de resumo ocupam 1 coluna cada
+  .summary-cards {
+    grid-column: 1 / -1; // Ocupa as 4 colunas
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+  }
+
+  // Seção de gráficos ocupa as 4 colunas
+  .charts-section {
+    grid-column: 1 / -1; // Ocupa as 4 colunas
+    display: grid;
+    grid-template-columns: 2fr 1fr; // Gráfico de linha (2/3) e pizza (1/3)
+    grid-gap: 20px;
+  }
+
+  // Tabela de transações ocupa as 4 colunas
+  .transactions-container {
+    grid-column: 1 / -1; // Ocupa as 4 colunas
+  }
+}
+
+// Estilo Padrão dos Cards
+.card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+
+  .card-title {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 8px;
+  }
+
+  .card-value {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+  }
+}
+
+// Estilo do container do gráfico
+.chart-container {
+  height: 350px; // Altura fixa para o canvas
+  position: relative; // Necessário para a responsividade do chart.js
+}
+
+// Estilo da Tabela de Transações
+.transactions-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+
+  th, td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+  }
+
+  th {
+    font-size: 14px;
+    color: #666;
+  }
+
+  td {
+    font-size: 15px;
+  }
+
+  .status {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+
+    &.status-pago {
+      background-color: #e0f5ea;
+      color: #34c759;
+    }
+
+    &.status-pendente {
+      background-color: #fceeee;
+      color: #e63946;
+    }
+  }
+
+  i {
+    color: #5b3e94;
+    cursor: pointer;
+  }
+}
+
+// ---- Responsividade (Exemplo para telas pequenas) ----
+@media (max-width: 1200px) {
+  .charts-section {
+    grid-template-columns: 1fr; // Gráficos um em cima do outro
+  }
+}
+
+@media (max-width: 900px) {
+  .summary-cards {
+    grid-template-columns: repeat(2, 1fr); // 2 colunas
+  }
+}
+
+@media (max-width: 500px) {
+  .summary-cards {
+    grid-template-columns: 1fr; // 1 coluna
+  }
+}
