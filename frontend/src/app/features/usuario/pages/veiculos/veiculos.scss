@@ -1,0 +1,179 @@
+:root {
+  --primary-bg-color: #DAD6F6; /* Fundo principal (lilás suave) */
+  --block-bg-color: #E8DDFB; /* Fundo dos blocos principais */
+  --text-color: #000000; /* Texto escuro */
+  --text-secondary-color: #555; /* Títulos dos campos */
+  --active-color: #72DB64; /* Verde do status 'Ativo' */
+  --orange-dot: #FF7700; /* Laranja da bolinha de cor */
+  --pdf-icon-color: #DD172B; /* Vermelho para o ícone de PDF */
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* GERAL */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--primary-bg-color);
+  font-family: "ROBOTO", sans-serif;
+  color: var(--text-color);
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 15px 30px;
+}
+
+.user-name {
+  margin-right: 10px;
+  color: var(--text-color);
+  font-size: 16px;
+  text-transform: capitalize;
+}
+
+.user-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--block-bg-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow);
+}
+
+.user-icon svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--text-secondary-color);
+}
+
+/* CONTAINER PRINCIPAL */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* CARD PRINCIPAL */
+.main-card {
+  background-color: var(--block-bg-color);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  width: 90%;
+  max-width: 600px;
+  padding: 80px;
+}
+
+.main-card h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 25px;
+}
+
+.vehicle-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.info-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.vehicle-info p {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-color);
+  margin: 0;
+}
+
+.vehicle-info span {
+  margin-top: 4px;
+  font-size: 16px;
+  color: var(--text-color);
+  font-weight: 400;
+}
+
+.color-dot {
+  width: 14px;
+  height: 14px;
+  background-color: var(--orange-dot);
+  border-radius: 50%;
+  display: inline-block;
+  margin-top: 5px;
+}
+
+.status {
+  display: inline-block;
+  background-color: var(--active-color);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 8px;
+  margin-top: 5px;
+}
+
+/* CARDS INFERIORES */
+.bottom-section {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 30px;
+}
+
+.card-inferior {
+  background-color: var(--block-bg-color);
+  box-shadow: var(--shadow);
+  border-radius: 10px;
+  padding: 15px;
+  width: calc(100% - 100px);
+}
+
+.card-inferior h3 {
+  font-size: 18px;
+  font-weight: 800;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.movimentacoes-card ul,
+.relatorio-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.movimentacoes-card li,
+.relatorio-card li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 8px 0;
+  font-size: 14px;
+}
+
+.movimentacoes-card .duration {
+  font-weight: 500;
+}
+
+.pdf-icon-image {
+  width: 20px;
+  height: 20px;
+  margin-left: 8px;
+  vertical-align: middle;
+  transition: transform 0.2s ease;
+}
+
+.pdf-icon-image:hover {
+  transform: scale(1.2);
+}

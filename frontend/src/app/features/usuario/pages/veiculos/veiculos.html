@@ -1,1 +1,77 @@
-<p>veiculos works!</p>
+<link rel="stylesheet" href="veiculos.scss">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <span class="user-name">Fulano</span>
+    <div class="user-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+           viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="main-card">
+      <h2>Meus Veículos</h2>
+
+      <div class="vehicle-info">
+        <div class="info-group">
+          <p>Placa</p>
+          <span>CRI-2578</span>
+        </div>
+
+        <div class="info-group">
+          <p>Modelo</p>
+          <span>Vectra</span>
+        </div>
+
+        <div class="info-group">
+          <p>Cor</p>
+          <span class="color-dot"></span>
+        </div>
+
+        <div class="info-group">
+          <p>Situação</p>
+          <span class="status ativo">Ativo</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="bottom-section">
+      <section class="card-inferior movimentacoes-card">
+        <h3>Últimas Movimentações</h3>
+        <ul>
+          <li>29/09 às 15h <span class="duration">2h</span></li>
+          <li>30/09 às 18h <span class="duration">3h</span></li>
+        </ul>
+      </section>
+
+      <section class="card-inferior relatorio-card">
+        <h3>Relatório Mensal</h3>
+        <ul class="relatorios">
+          <li>01/09 até 30/09 
+            <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="Ícone PDF" class="pdf-icon-image">
+          </li>
+          <li>01/10 até 31/10 
+            <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="Ícone PDF" class="pdf-icon-image">
+          </li>
+          <li>01/11 até 30/11 
+            <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="Ícone PDF" class="pdf-icon-image">
+          </li>
+          <li>01/12 até 31/12 
+            <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="Ícone PDF" class="pdf-icon-image">
+          </li>
+          <li>01/01 até 31/01 
+            <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="Ícone PDF" class="pdf-icon-image">
+          </li>
+        </ul>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
+
