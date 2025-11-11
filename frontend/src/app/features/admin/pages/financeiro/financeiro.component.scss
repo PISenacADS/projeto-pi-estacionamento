@@ -1,49 +1,42 @@
 :host {
   display: block;
   padding: 24px;
-  background-color: #f4f7fa; // Cor de fundo suave
 }
 
 h1, h3 {
-  font-family: 'Arial', sans-serif; // Use a fonte do seu projeto
+  font-family: 'Arial', sans-serif; 
   font-weight: bold;
 }
 
-// Layout principal do Dashboard
 .dashboard-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); // 4 colunas
+  grid-template-columns: repeat(4, 1fr); 
   grid-gap: 20px;
 
-  // Título ocupa as 4 colunas
   h1 {
     grid-column: 1 / -1;
     margin-bottom: 0;
   }
 
-  // Cards de resumo ocupam 1 coluna cada
   .summary-cards {
-    grid-column: 1 / -1; // Ocupa as 4 colunas
+    grid-column: 1 / -1; 
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 20px;
   }
 
-  // Seção de gráficos ocupa as 4 colunas
   .charts-section {
-    grid-column: 1 / -1; // Ocupa as 4 colunas
+    grid-column: 1 / -1; 
     display: grid;
-    grid-template-columns: 2fr 1fr; // Gráfico de linha (2/3) e pizza (1/3)
+    grid-template-columns: 2fr 1fr; 
     grid-gap: 20px;
   }
 
-  // Tabela de transações ocupa as 4 colunas
   .transactions-container {
-    grid-column: 1 / -1; // Ocupa as 4 colunas
+    grid-column: 1 / -1; 
   }
 }
 
-// Estilo Padrão dos Cards
 .card {
   background-color: #ffffff;
   border-radius: 12px;
@@ -65,13 +58,14 @@ h1, h3 {
   }
 }
 
-// Estilo do container do gráfico
-.chart-container {
-  height: 350px; // Altura fixa para o canvas
-  position: relative; // Necessário para a responsividade do chart.js
+.chart-wrapper {
+  flex-grow: 1; 
+  height: 300px;
+  position: relative; 
 }
 
-// Estilo da Tabela de Transações
+
+
 .transactions-table {
   width: 100%;
   border-collapse: collapse;
@@ -115,21 +109,20 @@ h1, h3 {
   }
 }
 
-// ---- Responsividade (Exemplo para telas pequenas) ----
 @media (max-width: 1200px) {
   .charts-section {
-    grid-template-columns: 1fr; // Gráficos um em cima do outro
+    grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 900px) {
   .summary-cards {
-    grid-template-columns: repeat(2, 1fr); // 2 colunas
+    grid-template-columns: repeat(2, 1fr); 
   }
 }
 
 @media (max-width: 500px) {
   .summary-cards {
-    grid-template-columns: 1fr; // 1 coluna
+    grid-template-columns: 1fr; 
   }
 }
