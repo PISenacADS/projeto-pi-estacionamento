@@ -1,29 +1,11 @@
 /* ================================
    Definição das variáveis de cor
 ================================ */
-:root {
-  --primary-bg-color: #DAD6F6; /* Fundo principal (lilás suave) */
-  --block-bg-color: #E8DDFB; /* Fundo dos blocos principais (claro) */
-  --text-color: #000000; /* Texto escuro */
-  --placeholder-color: #a39393; /* Texto secundário */
-  --button-color: #5D3FD3; /* Roxo principal do botão */
-  --active-color: #37d942; /* Verde de 'Ativo' */
-  --inactive-color: #dd172b; /* Vermelho de 'Inativo' */
-  --border-color: #e9ecef; /* Cor da borda */
-  --balance-label-color: #7b4dc9; /* Roxo do "Meu Saldo" */
-  --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
+
 
 /* ================================
    Estilos Globais
 ================================ */
-body {
-  font-family: 'Segoe UI', Roboto, sans-serif;
-  background-color: var(--primary-bg-color);
-  color: var(--text-color);
-  margin: 0;
-  padding: 30px;
-}
 
 .app-container {
   max-width: 900px;
@@ -301,14 +283,25 @@ body {
 }
 
 .vehicle-icon {
-  width: 80px;
-  height: 40px;
-  background-image: url('carro-amarelo.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  margin-bottom: 10px;
+  width: 70px;
+  height: 70px;
+  min-width: 70px; 
+  border-radius: 50%;
+  background-color: transparent; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  margin-bottom: 8px;
 }
+
+.vehicle-icon img {
+  max-width: 100%; 
+  max-height: 100%; 
+  object-fit: contain; 
+}
+
+
 
 .vehicle-name {
   font-weight: bold;

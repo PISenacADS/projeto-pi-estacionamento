@@ -1,6 +1,43 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
+:root {
+  --primary-bg-color: #DAD6F6; /* Fundo principal (lilás suave) */
+  --block-bg-color: #E8DDFB; /* Fundo dos blocos principais */
+  --text-color: #000000; /* Texto escuro */
+  --text-secondary-color: #555; /* Títulos dos campos */
+  --active-color: #72DB64; /* Verde do status 'Ativo' */
+  --orange-dot: #FF7700; /* Laranja da bolinha de cor */
+  --pdf-icon-color: #DD172B; /* Vermelho para o ícone de PDF */
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --cor-fundo: #f2e9f7;
+  --cor-primaria: #FFA733; 
+  --cor-secundaria: #6C30C5; 
+  --cor-texto-principal: #E94C89; 
+  --cor-texto-secundario: #6C30C5;
+  --primary-bg-color: #DAD6F6; /* Fundo principal (lilás suave) */
+  --block-bg-color: #E8DDFB; /* Fundo dos blocos principais (claro) */
+  --text-color: #000000; /* Texto escuro */
+  --placeholder-color: #a39393; /* Texto secundário */
+  --button-color: #5D3FD3; /* Roxo principal do botão */
+  --active-color: #37d942; /* Verde de 'Ativo' */
+  --inactive-color: #dd172b; /* Vermelho de 'Inativo' */
+  --border-color: #e9ecef; /* Cor da borda */
+  --balance-label-color: #7b4dc9; /* Roxo do "Meu Saldo" */
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --primary-bg-color: #DAD6F6; /* Fundo principal (lilás suave) */
+  --header-bg-color: #E3ECF9; /* Fundo do topo (cinza/azul muito claro) */
+  --block-bg-color: #E3ECF9; /* Fundo dos blocos principais */
+  --text-color: #000000; /* Texto escuro */
+  --placeholder-color: #6c757d; /* Cor do texto dentro dos inputs */
+  --button-color: #5D3FD3; /* Roxo principal do botão */
+  --active-color: #37D942; /* Verde de 'Ativo' */
+  --inactive-color: #DD172B; /* Vermelho de 'Inativo' */
+  --border-color: #e9ecef;
+  --input-bg-color: #f7f7f7;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
+}
+
 body,html {
   margin: 0;
   padding: 0;
