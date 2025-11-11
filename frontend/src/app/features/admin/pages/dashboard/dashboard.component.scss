@@ -1,7 +1,7 @@
 .dashboard-container{
   display: block;
   padding: 24px;
-  background-color: #fdfafa; // Cor de fundo do dashboard
+  background-color: #fdfafa; 
   font-family: Arial, sans-serif;
   border-radius: 20px;
 }
@@ -19,15 +19,12 @@ h4 {
   margin: 0 0 16px 0;
 }
 
-/* O Layout em Grid (a "mágica" do layout) */
 .dashboard-grid {
   display: grid;
-  // Cria 2 colunas de tamanho igual (1fr = 1 fração)
   grid-template-columns: repeat(2, 1fr);
-  grid-gap: 24px; // Espaçamento entre os cards
+  grid-gap: 24px; 
 }
 
-/* Estilo padrão para todos os 4 cards */
 .card {
   background-color: #ffffff;
   border-radius: 12px;
@@ -35,7 +32,6 @@ h4 {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-/* Card 1: Ocupação */
 .card-occupation {
   .value {
     font-size: 28px;
@@ -48,16 +44,15 @@ h4 {
     height: 10px;
     background-color: #f0f0f0;
     border-radius: 5px;
-    overflow: hidden; // Garante que a barra interna fique nos limites
+    overflow: hidden; 
   }
   .progress-fill {
     height: 100%;
-    background-color: #5b3e94; // Cor roxa
+    background-color: #5b3e94; 
     border-radius: 5px;
   }
 }
 
-/* Card 2: Receita */
 .card-revenue {
   .value {
     font-size: 28px;
@@ -67,21 +62,18 @@ h4 {
   }
 }
 
-/* Cards de Gráfico (Altura) */
 .card-revenue,
 .card-weekly {
-  /* Define uma altura para os cards com gráficos */
   min-height: 250px;
   display: flex;
   flex-direction: column;
 
   .chart-container {
-    flex-grow: 1; // Faz o gráfico ocupar o espaço restante
+    flex-grow: 1; 
     position: relative;
   }
 }
 
-/* Card 4: Pagamentos */
 .card-payments {
   .payment-list {
     list-style: none;
@@ -89,32 +81,28 @@ h4 {
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 16px; // Espaço entre os itens
+    gap: 16px; 
   }
 
   .payment-item {
     display: grid;
-    // Layout para alinhar a lista (Placa | Valor | Data)
     grid-template-columns: 1fr auto auto;
     gap: 16px;
     font-size: 14px;
     color: #333;
 
     span:nth-child(2) {
-      font-weight: 600; // Valor em negrito
+      font-weight: 600; 
     }
     span:nth-child(3) {
-      color: #888; // Data com cor mais clara
+      color: #888; 
       text-align: right;
     }
   }
 }
 
-
-/* ---- Responsividade para Celulares ---- */
 @media (max-width: 900px) {
   .dashboard-grid {
-    // Em telas menores, os cards ficam um em cima do outro
     grid-template-columns: 1fr;
   }
 }
