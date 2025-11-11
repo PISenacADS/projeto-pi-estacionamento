@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-perfil',
   standalone: true,
   imports: [  CommonModule],
-  templateUrl: './perfil.html',
+  templateUrl:   './perfil.html',
   styleUrl: './perfil.scss'
 })
 export class PerfilComponent {
