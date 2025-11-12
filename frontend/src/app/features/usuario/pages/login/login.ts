@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, RouterLinkActive],
   templateUrl: './login.html',
   styleUrls: ['./login.scss'] 
 })
@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
     this.loginForm = this.fb.group({
 
       email: ['', [Validators.required, Validators.email]],
@@ -29,14 +30,22 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(): void {
+
     if (this.loginForm.invalid) {
       alert('Por favor, preencha os campos corretamente.');
       return;
     }
 
-    console.log('Login bem-sucedido! Dados:', this.loginForm.value);
-    alert('✅ Login realizado com sucesso!');
-    this.loginForm.reset();
+    const email = this.loginForm.value.email;
+    const senha = this.loginForm.value.senha;
+
+    if (email == 'admin@gmail.com' && senha == 1234){
+      
+      this.router.navigate (['admin/dashboard']);
+      this.loginForm.reset();
+    } else {
+      alert('Usuario ou senha invalida!')
+    }
   }
   
   onRegister(): void {
