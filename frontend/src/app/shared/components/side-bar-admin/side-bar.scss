@@ -4,11 +4,14 @@
   background-color: #DEE3F4; 
   padding: 20px;
   box-shadow: 5px 0 8px rgb(167, 122, 194);
-  border-radius: 5%;
+  border-radius: 0 30px 30px 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between; 
   font-family: 'Roboto', sans-serif;
+
+  position: relative;
+  overflow: hidden;
 }
 
 .icon {
@@ -67,4 +70,27 @@
 
 .menu-list li a i {
   margin-right: 15px;
+}
+
+.sidebar::after {
+  content: '';
+  position: absolute; 
+  width: 150px; 
+  height: 150px;
+  background-color: #9873CF; 
+  border: solid 5px #a57baf;
+  border-radius: 50%;
+
+  bottom: 0;
+  left: 0;
+  transform: translate(-40%, 40%); 
+
+  z-index: 1;
+}
+
+.logo,
+.menu-list,
+.logout { 
+  position: relative;
+  z-index: 2;
 }
