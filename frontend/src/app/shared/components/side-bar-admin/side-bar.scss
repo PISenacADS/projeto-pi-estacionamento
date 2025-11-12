@@ -9,7 +9,6 @@
   flex-direction: column;
   justify-content: space-between; 
   font-family: 'Roboto', sans-serif;
-
   position: relative;
   overflow: hidden;
 }
@@ -47,6 +46,10 @@
   font-size: 22px;
   border: solid 2px #7d47db;
   background-color: #D2B9FE;
+}
+
+.logout a{
+  color: white;
 }
 
 .menu-list li a:hover {
