@@ -42,7 +42,7 @@ public class VeiculoController {
         return veiculoService.atualizarVeiculo(id, veiculo);
     }
 
-    // 🔹 Remover um veículo pelo ID
+    
     @DeleteMapping("/{id}")
     public String removerVeiculo(@PathVariable Long id) {
         boolean removido = veiculoService.removerVeiculo(id);
