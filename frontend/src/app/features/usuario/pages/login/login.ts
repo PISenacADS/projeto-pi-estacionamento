@@ -42,35 +42,32 @@ export class LoginComponent implements OnInit {
 
     this.apiservice.login(credenciais).subscribe({
       
-      // Callback de Sucesso
       next: (resposta) => {
         console.log('Login bem-sucedido!', resposta);
         
-        // A lógica de redirecionamento (baseada na resposta) está correta
         if (resposta.usuario && resposta.usuario.role === 'ADMIN') { 
-          alert('✅ Bem-vindo, Administrador!');
+          alert('Bem-vindo, Administrador!');
           this.router.navigate(['/admin/dashboard']);
 
         } else if (resposta.usuario && resposta.usuario.role === 'CLIENTE') {
-          alert('✅ Login realizado com sucesso!');
+          alert('Login realizado com sucesso!');
           this.router.navigate(['/usuario/home']); 
 
         } else {
           console.error('O "role" do usuário não foi encontrado na resposta.');
-          alert('✅ Login realizado. Redirecionando...');
+          alert('Login realizado. Redirecionando...');
           this.router.navigate(['/usuario/home']);
         }
       },
-    
-      // --- ✅ CORREÇÃO DO ERRO AQUI ---
-      // Agora, qualquer erro (403, 500, etc.) será tratado como
-      // "E-mail ou senha inválidos".
+  
       error: (erro) => {
         console.error('ERRO ao logar:', erro);
         alert('❌ ERRO: E-mail ou senha inválidos.');
       }
     });
   }
+
+
   
   onRegister(): void {
     this.router.navigate(['/padrao/cadastro']); 

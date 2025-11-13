@@ -11,18 +11,29 @@
         <th>ID</th>
         <th>Nome</th>
         <th>Email</th>
-        <th>CPF</th>
-        <th>Ações</th>
+        <th>Telefone</th> 
+        <th>Ações</th>     
       </tr>
     </thead>
     <tbody>
+ 
       <tr *ngFor="let usuario of usuarios">
         <td>{{ usuario.id }}</td>
         <td>{{ usuario.nome }}</td>
         <td>{{ usuario.email }}</td>
-        <td>{{ usuario.cpf }}</td>
+        <td>{{ usuario.telefone }}</td> 
         <td>
-          </td>
+
+          <div class="actions">
+            <button class="edit-button" [routerLink]="['/admin/cadastro', usuario.id]">
+              Editar
+            </button>
+            
+            <button class="delete-button" (click)="deletarUsuario(usuario.id!)">
+              Excluir
+            </button>
+          </div>
+        </td>
       </tr>
     </tbody>
   </table>
