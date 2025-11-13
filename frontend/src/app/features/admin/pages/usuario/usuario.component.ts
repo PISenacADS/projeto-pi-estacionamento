@@ -4,7 +4,6 @@ import { Usuario, UsuarioService } from './services/usuario.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
-
 @Component({
   selector: 'app-usuario',
   standalone: true,

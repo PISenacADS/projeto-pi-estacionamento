@@ -1,12 +1,11 @@
 <div class="container">
   <div class="login-card">
     <div class="user-icon-placeholder">
-      <span class="material-icons">person_add</span> <!-- Ícone de "adicionar pessoa" -->
+      <span class="material-icons">person_add</span> 
     </div>
 
     <form [formGroup]="cadastroForm" (ngSubmit)="onSubmit()">
 
-      <!-- 👇 CAMPO NOME (ADICIONADO) 👇 -->
       <div class="input-group">
         <div class="input-field">
           <input
@@ -15,7 +14,7 @@
             placeholder="Nome Completo"
           />
         </div>
-        <!-- Mensagem de erro (opcional, mas recomendado) -->
+ 
         <div *ngIf="cadastroForm.get('nome')?.touched && cadastroForm.get('nome')?.invalid" class="error-message">
           Nome é obrigatório.
         </div>
@@ -34,7 +33,6 @@
         </div>
       </div>
 
-      <!-- 👇 CAMPO TELEFONE (ADICIONADO) 👇 -->
       <div class="input-group">
         <div class="input-field">
           <input
