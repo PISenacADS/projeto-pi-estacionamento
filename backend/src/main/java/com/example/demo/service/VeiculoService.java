@@ -1,51 +1,48 @@
 package com.example.demo.service;
 
 import com.example.demo.model.Veiculo;
+import com.example.demo.repository.VeiculoRepository; 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
 import java.util.List;
+
 
 @Service
 public class VeiculoService {
 
-    private final List<Veiculo> veiculos = new ArrayList<>();
-
-    public VeiculoService() {
-        veiculos.add(new Veiculo(1L, "CRI-2578", "Vectra", "Laranja", true, null));
-        veiculos.add(new Veiculo(2L, "XYZ-1234", "Civic", "Preto", false, null));
-        veiculos.add(new Veiculo(3L, "GHI-7777", "Corolla", "Branco", true, null));
-    }
+    @Autowired
+    private VeiculoRepository veiculoRepository; 
 
     public List<Veiculo> listarVeiculos() {
-        return veiculos;
+        return veiculoRepository.findAll(); 
     }
 
     public Veiculo buscarPorId(Long id) {
-        return veiculos.stream()
-                .filter(v -> v.getId().equals(id))
-                .findFirst()
-                .orElse(null);
+        return veiculoRepository.findById(id).orElse(null);
     }
 
     public Veiculo adicionarVeiculo(Veiculo veiculo) {
-        veiculo.setId((long) (veiculos.size() + 1));
-        veiculos.add(veiculo);
-        return veiculo;
+        return veiculoRepository.save(veiculo);
     }
 
     public Veiculo atualizarVeiculo(Long id, Veiculo veiculoAtualizado) {
-        Veiculo veiculoExistente = buscarPorId(id);
+        Veiculo veiculoExistente = veiculoRepository.findById(id).orElse(null);
         if (veiculoExistente != null) {
             veiculoExistente.setPlaca(veiculoAtualizado.getPlaca());
             veiculoExistente.setModelo(veiculoAtualizado.getModelo());
             veiculoExistente.setCor(veiculoAtualizado.getCor());
             veiculoExistente.setSituacao(veiculoAtualizado.isSituacao());
-            return veiculoExistente;
+            veiculoExistente.setCliente(veiculoAtualizado.getCliente());
+            return veiculoRepository.save(veiculoExistente);
         }
         return null;
     }
 
     public boolean removerVeiculo(Long id) {
-        return veiculos.removeIf(v -> v.getId().equals(id));
+        if (veiculoRepository.existsById(id)) {
+            veiculoRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }

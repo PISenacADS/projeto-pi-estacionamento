@@ -16,7 +16,7 @@ import com.example.demo.model.Veiculo;
 import com.example.demo.service.VeiculoService;
 
 @RestController
-@RequestMapping("/veiculos")
+@RequestMapping("/api/veiculos")
 public class VeiculoController {
 
     @Autowired

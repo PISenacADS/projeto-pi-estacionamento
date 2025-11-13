@@ -1,22 +1,125 @@
-.automovel-container {
-  max-width: 1150px; 
-  margin: 0 auto;    
+/* Configurações globais da página */
+:host {
+  display: block;
+  padding: 24px;
+  min-height: 100vh;
 }
 
+/* Título "Automóvel" */
 .titulo {
-  margin-top: 100px;
-  font-size: 50px;
-  font-weight: bold;
-  margin-bottom: 20px; 
+  font-family: Arial, sans-serif;
+  font-size: 32px;
+  font-weight: 900;
+  color: #333;
+  margin-bottom: 20px;
 }
 
-.dados {
-  background-color: white;
-  list-style: none;
+/* Linha superior com Título e Botão */
+.top-row {
   display: flex;
   justify-content: space-between;
-  padding: 11px;
-  font-size: 20px;
-  font-weight: bold;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Botão "Adicionar" */
+.add-button {
+  background-color: #5b3e94; // Roxo
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 15px;
+  font-weight: 600;
   border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #4a2f7c;
+  }
+}
+
+.data-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  padding: 24px;
+  overflow-x: auto; 
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse; 
+
+  th, td {
+    text-align: left;
+    padding: 16px;
+    vertical-align: middle; 
+  }
+
+  th {
+    font-size: 14px;
+    font-weight: 600;
+    color: #555;
+    text-transform: uppercase;
+    border-bottom: 2px solid #f0f0f0;
+  }
+
+  tbody tr {
+    
+    border-bottom: 1px solid #f0f0f0; 
+    
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  td {
+    font-size: 15px;
+    color: #333;
+  }
+}
+
+.color-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.material-icons {
+  font-size: 24px;
+  vertical-align: middle;
+}
+
+.icon-success {
+  color: #28a745; 
+}
+.icon-danger {
+  color: #dc3545; 
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+
+  .icon-edit, .icon-delete {
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  .icon-edit {
+    color: #007bff; 
+    &:hover { color: #0056b3; }
+  }
+  .icon-delete {
+    color: #dc3545;
+    &:hover { color: #a71d2a; }
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  font-size: 16px;
+  color: #777;
 }

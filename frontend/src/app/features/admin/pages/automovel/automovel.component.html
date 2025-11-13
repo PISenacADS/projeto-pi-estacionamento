@@ -1,13 +1,64 @@
 <div class="automovel-container">
 
-  <h1 class="titulo">Automovel</h1>
+  <div class="top-row">
+    <h1 class="titulo">Automóvel</h1>
+    <button class="add-button" routerLink="/admin/cadastro-veiculo">Adicionar</button>
+  </div>
 
-  <ul class="dados">
-    <li>Placa</li>
-    <li>Modelo</li>
-    <li>Cor</li>
-    <li>Situação</li>
-    <li>Ação</li>
-  </ul>
-  
+  <div *ngIf="isLoading" class="empty-state">
+    <p>Carregando veículos...</p>
+  </div>
+
+
+  <div class="data-card" *ngIf="!isLoading && veiculos.length > 0">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Placa</th>
+          <th>Modelo</th>
+          <th>Cor</th>
+          <th>Situação</th>
+          <th>Ação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let veiculo of veiculos">
+          <td>{{ veiculo.placa }}</td>
+          <td>{{ veiculo.modelo }}</td>
+          
+          <td>
+
+            <div class="color-dot" [style.backgroundColor]="veiculo.cor.toLowerCase()"></div>
+          </td>
+          
+
+          <td>
+            <span *ngIf="veiculo.situacao" class="material-icons icon-success" title="Ativo">
+              check_circle
+            </span>
+            <span *ngIf="!veiculo.situacao" class="material-icons icon-danger" title="Inativo">
+              cancel
+            </span>
+          </td>
+          
+          <td>
+            <div class="actions">
+
+              <span class="material-icons icon-edit" title="Editar Veículo" [routerLink]="['/admin/cadastro-veiculo', veiculo.id]">
+                edit
+              </span>
+              <span class="material-icons icon-delete" title="Excluir Veículo" (click)="deletarVeiculo(veiculo.id!)">
+                delete_outline
+              </span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="!isLoading && veiculos.length === 0" class="empty-state">
+    <p>Nenhum veículo encontrado.</p>
+  </div>
+
 </div>
