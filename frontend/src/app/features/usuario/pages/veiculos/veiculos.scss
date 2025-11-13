@@ -2,19 +2,20 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  padding: 15px 30px;
+  padding: 20px 40px; 
 }
 
 .user-name {
-  margin-right: 10px;
+  margin-right: 15px;
   color: var(--text-color);
-  font-size: 16px;
+  font-size: 22px;
+  font-weight: 600;
   text-transform: capitalize;
 }
 
 .user-icon {
-  width: 40px;
-  height: 40px;
+  width: 60px;  
+  height: 60px; 
   border-radius: 50%;
   background-color: var(--block-bg-color);
   display: flex;
@@ -24,106 +25,114 @@
 }
 
 .user-icon svg {
-  width: 20px;
-  height: 20px;
+  width: 32px;
+  height: 32px;
   stroke: var(--text-secondary-color);
+  stroke-width: 2.5; 
 }
 
-/* CONTAINER PRINCIPAL */
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 40px; 
+  width: 100%;
 }
 
-/* CARD PRINCIPAL */
 .main-card {
   background-color: var(--block-bg-color);
-  border-radius: 10px;
+  border-radius: 16px; 
   box-shadow: var(--shadow);
+  
   width: 90%;
-  max-width: 600px;
-  padding: 80px;
+  max-width: 1000px; 
+  
+  padding: 60px; 
 }
 
 .main-card h2 {
-  font-size: 24px;
-  font-weight: 700;
+  font-size: 36px; 
+  font-weight: 800;
   margin-top: 0;
-  margin-bottom: 25px;
+  margin-bottom: 40px;
+  color: var(--text-color);
 }
 
 .vehicle-info {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  gap: 20px;
+  align-items: center; 
+  gap: 30px;
 }
 
 .info-group {
   display: flex;
   flex-direction: column;
+  gap: 5px;
 }
 
 .vehicle-info p {
-  font-size: 16px;
-  font-weight: 500;
-  color: var(--text-color);
+  font-size: 20px; 
+  font-weight: 600;
+  color: var(--text-secondary-color, #666); 
   margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .vehicle-info span {
-  margin-top: 4px;
-  font-size: 16px;
+  font-size: 28px; 
   color: var(--text-color);
-  font-weight: 400;
+  font-weight: 700;
 }
 
 .color-dot {
-  width: 14px;
-  height: 14px;
+  width: 25px; 
+  height: 25px;
   background-color: var(--orange-dot);
   border-radius: 50%;
   display: inline-block;
   margin-top: 5px;
+  border: 2px solid rgba(0,0,0,0.1); 
 }
 
 .status {
   display: inline-block;
   background-color: var(--active-color);
-  color: #fff;
-  font-size: 12px;
-  font-weight: 500;
-  padding: 3px 10px;
-  border-radius: 8px;
-  margin-top: 5px;
+  color: #fff !important; 
+  
+  font-size: 16px; 
+  padding: 6px 18px;
+  border-radius: 20px;
+  
+  font-weight: 600;
+  margin-top: 0;
 }
 
-/* CARDS INFERIORES */
 .bottom-section {
   display: flex;
   justify-content: center;
-  gap: 20px;
-  width: 100%;
-  max-width: 600px;
-  margin-bottom: 30px;
+  gap: 30px;
+  width: 90%;
+  max-width: 1000px;
+  margin-bottom: 50px;
 }
 
 .card-inferior {
   background-color: var(--block-bg-color);
   box-shadow: var(--shadow);
-  border-radius: 10px;
-  padding: 15px;
+  border-radius: 16px;
+  padding: 40px; 
   flex: 1;
 }
 
 .card-inferior h3 {
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 800;
   margin-top: 0;
-  margin-bottom: 15px;
-  box-shadow: var(--shadow);
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
 }
 
 .movimentacoes-card ul,
@@ -131,6 +140,9 @@
   list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px; 
 }
 
 .movimentacoes-card li,
@@ -138,30 +150,29 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 8px 0;
-  font-size: 14px;
+  
+  font-size: 18px; 
+  font-weight: 500;
+  color: var(--text-color);
 }
 
 .movimentacoes-card .duration {
-  font-weight: 500;
+  font-weight: 700;
+  background: #f0f0f0; 
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-size: 0.9em;
 }
 
 .pdf-icon-image {
-  width: 20px;
-  height: 20px;
-  margin-left: 8px;
+  width: 32px; 
+  height: 32px;
+  margin-left: 15px;
   vertical-align: middle;
   transition: transform 0.2s ease;
+  cursor: pointer;
 }
 
 .pdf-icon-image:hover {
   transform: scale(1.2);
 }
-
-
-
-
-
-
-
-

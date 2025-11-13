@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-
+/* Ajuste o container para dar espaço entre os elementos gigantes */
 .container {
-    margin-top: 8%;
+    margin-top: 5%; /* Reduzi um pouco a margem topo para caber na tela */
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 80px; /* ADICIONADO: Espaço entre o relógio e o cartão */
 }
 
 .left {
@@ -18,25 +18,22 @@
 h1 {
     color: #6C30C5;
     font-weight: 600;
-    margin-bottom: 40px;
+    font-size: 2.5em; /* AUMENTADO */
+    margin-bottom: 50px;
 }
 
+/* --- O GRANDE AUMENTO DO RELÓGIO --- */
 .timer-circle-container {
     position: relative;
-    width: 180px;
-    height: 180px;
+    width: 380px;  /* AUMENTADO (era 180px) */
+    height: 380px; /* AUMENTADO (era 180px) */
     margin: 0 auto;
     overflow: visible;
 }
 
 @keyframes girar-circulo-continuo {
-    0% {
-        transform: rotate(-90deg);
-    }
-
-    100% {
-        transform: rotate(270deg);
-    }
+    0% { transform: rotate(-90deg); }
+    100% { transform: rotate(270deg); }
 }
 
 .timer-ring {
@@ -49,26 +46,29 @@ h1 {
 .timer-bg {
     fill: none;
     stroke: rgba(255, 255, 255, 0.3);
-    stroke-width: 5;
+    stroke-width: 4; /* Ajuste fino visual */
 }
 
 .timer-progress {
     fill: none;
     stroke: url(#gradiente-timer);
-    stroke-width: 10;
+    stroke-width: 8; /* Ajuste fino visual */
     stroke-linecap: round;
     stroke-dasharray: 283;
     stroke-dashoffset: 0;
 }
 
+/* Aumentando os textos de DENTRO do relógio */
 .timer-time {
     position: absolute;
-    top: 35%;
+    top: 40%; /* Ajustado para centralizar melhor visualmente */
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 34px;
-    font-weight: 600;
+    
+    font-size: 85px; /* AUMENTADO (era 34px) */
+    font-weight: 700;
     z-index: 2;
+    
     background: linear-gradient(135deg, #E94C89, #6C30C5);
     -webkit-background-clip: text;
     background-clip: text;
@@ -78,25 +78,31 @@ h1 {
 
 .timer-text {
     position: absolute;
-    top: 65%;
+    top: 70%; /* Ajustado */
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 14px;
+    
+    font-size: 28px; /* AUMENTADO (era 14px) */
+    
     color: #5a4a80;
     margin: 0;
     z-index: 2;
     line-height: 1;
+    font-weight: 600;
 }
 
+/* --- AUMENTANDO O BOTÃO --- */
 .btn {
-    margin-top: 40px;
-    padding: 18px 60px;
+    margin-top: 60px;
+    padding: 22px 80px; /* AUMENTADO */
     border: none;
-    border-radius: 40px;
+    border-radius: 60px;
     background: linear-gradient(135deg, #6C30C5, #E94C89, #FFB347);
     color: #FFB347;
-    font-weight: 600;
-    font-size: 18px;
+    font-weight: 700;
+    
+    font-size: 24px; /* AUMENTADO (era 18px) */
+    
     letter-spacing: 1px;
     cursor: pointer;
     transition: transform 0.2s ease;
@@ -107,22 +113,30 @@ h1 {
     transform: scale(1.05);
 }
 
+/* --- AUMENTANDO O CARTÃO DA DIREITA (VEÍCULO) --- */
 .right {
     background: linear-gradient(135deg, #FFA733, #E94C89, #6C30C5);
     color: white;
-    padding: 25px 35px;
-    border-radius: 20px;
-    width: 280px;
+    
+    padding: 40px 50px; /* AUMENTADO */
+    border-radius: 30px;
+    width: 400px; /* AUMENTADO (era 280px) */
+    
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .right h2 {
     color: #2400B9;
-    font-size: 20px;
-    margin-bottom: 15px;
+    font-size: 36px; /* AUMENTADO (era 20px) */
+    margin-bottom: 25px;
+    text-transform: uppercase;
 }
 
 .right p {
-    margin: 8px 0;
-    font-size: 14px;
+    margin: 12px 0;
+    font-size: 20px; /* AUMENTADO (era 14px) */
+    line-height: 1.5;
 }
