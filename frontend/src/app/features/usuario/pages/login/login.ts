@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ApiService } from '../../../../core/services/api.service';
 
 @Component({
   selector: 'app-login',
@@ -16,13 +17,12 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private apiservice: ApiService
   ) { }
 
   ngOnInit(): void {
-
     this.loginForm = this.fb.group({
-
       email: ['', [Validators.required, Validators.email]],
       senha: ['', [Validators.required]],
       lembrar: [false]
@@ -30,26 +30,49 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(): void {
-
     if (this.loginForm.invalid) {
       alert('Por favor, preencha os campos corretamente.');
       return;
     }
 
-    const email = this.loginForm.value.email;
-    const senha = this.loginForm.value.senha;
+    const credenciais = {
+      email: this.loginForm.value.email,
+      senha: this.loginForm.value.senha
+    };
 
-    if (email == 'admin@gmail.com' && senha == 1234){
+    this.apiservice.login(credenciais).subscribe({
       
-      this.router.navigate (['admin/dashboard']);
-      this.loginForm.reset();
-    } else {
-      alert('Usuario ou senha invalida!')
-    }
+      // Callback de Sucesso
+      next: (resposta) => {
+        console.log('Login bem-sucedido!', resposta);
+        
+        // A lógica de redirecionamento (baseada na resposta) está correta
+        if (resposta.usuario && resposta.usuario.role === 'ADMIN') { 
+          alert('✅ Bem-vindo, Administrador!');
+          this.router.navigate(['/admin/dashboard']);
+
+        } else if (resposta.usuario && resposta.usuario.role === 'CLIENTE') {
+          alert('✅ Login realizado com sucesso!');
+          this.router.navigate(['/usuario/home']); 
+
+        } else {
+          console.error('O "role" do usuário não foi encontrado na resposta.');
+          alert('✅ Login realizado. Redirecionando...');
+          this.router.navigate(['/usuario/home']);
+        }
+      },
+    
+      // --- ✅ CORREÇÃO DO ERRO AQUI ---
+      // Agora, qualquer erro (403, 500, etc.) será tratado como
+      // "E-mail ou senha inválidos".
+      error: (erro) => {
+        console.error('ERRO ao logar:', erro);
+        alert('❌ ERRO: E-mail ou senha inválidos.');
+      }
+    });
   }
   
   onRegister(): void {
-    console.log('Navegando para a página de cadastro...');
-    this.router.navigate(['/caminho-para-o-cadastro']); 
+    this.router.navigate(['/padrao/cadastro']); 
   }
 }

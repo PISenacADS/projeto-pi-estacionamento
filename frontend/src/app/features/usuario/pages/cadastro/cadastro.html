@@ -1,10 +1,26 @@
 <div class="container">
   <div class="login-card">
     <div class="user-icon-placeholder">
-      <span class="material-icons">person</span>
+      <span class="material-icons">person_add</span> <!-- Ícone de "adicionar pessoa" -->
     </div>
 
     <form [formGroup]="cadastroForm" (ngSubmit)="onSubmit()">
+
+      <!-- 👇 CAMPO NOME (ADICIONADO) 👇 -->
+      <div class="input-group">
+        <div class="input-field">
+          <input
+            type="text"
+            formControlName="nome"
+            placeholder="Nome Completo"
+          />
+        </div>
+        <!-- Mensagem de erro (opcional, mas recomendado) -->
+        <div *ngIf="cadastroForm.get('nome')?.touched && cadastroForm.get('nome')?.invalid" class="error-message">
+          Nome é obrigatório.
+        </div>
+      </div>
+
       <div class="input-group">
         <div class="input-field">
           <input
@@ -12,6 +28,23 @@
             formControlName="email"
             placeholder="E-mail"
           />
+        </div>
+        <div *ngIf="cadastroForm.get('email')?.touched && cadastroForm.get('email')?.invalid" class="error-message">
+          E-mail inválido.
+        </div>
+      </div>
+
+      <!-- 👇 CAMPO TELEFONE (ADICIONADO) 👇 -->
+      <div class="input-group">
+        <div class="input-field">
+          <input
+            type="tel"
+            formControlName="telefone"
+            placeholder="Telefone (ex: 11999998888)"
+          />
+        </div>
+        <div *ngIf="cadastroForm.get('telefone')?.touched && cadastroForm.get('telefone')?.invalid" class="error-message">
+          Telefone é obrigatório.
         </div>
       </div>
 
@@ -23,6 +56,9 @@
             placeholder="Senha"
           />
         </div>
+        <div *ngIf="cadastroForm.get('senha')?.touched && cadastroForm.get('senha')?.invalid" class="error-message">
+          A senha deve ter pelo menos 6 caracteres.
+        </div>
       </div>
 
       <div class="input-group">
@@ -33,24 +69,23 @@
             placeholder="Confirmar Senha"
           />
         </div>
-      </div>
-
-      <div class="options">
-        <label class="remember">
-          <input type="checkbox" formControlName="lembrar" />
-          Lembrar-me
-        </label>
-        <a href="#" class="forgot-link">Esqueceu a senha?</a>
+        <div *ngIf="cadastroForm.get('confirmarSenha')?.touched && cadastroForm.get('confirmarSenha')?.errors?.['senhasNaoCoincidem']" class="error-message">
+          As senhas não coincidem.
+        </div>
       </div>
 
       <div class="button-group">
-        <button type="submit" class="btn btn-register">
+        <button type="submit" class="btn btn-register" [disabled]="cadastroForm.invalid">
           <span class="icon-car-key">
             <span class="material-icons icon-base">directions_car</span>
             <span class="material-icons icon-overlay">key</span>
           </span>
           Cadastrar
         </button>
+      </div>
+
+      <div class="login-link">
+        Já tem uma conta? <a routerLink="/padrao/login">Faça o login</a>
       </div>
     </form>
   </div>
