@@ -1,12 +1,12 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { Veiculo, VeiculoService } from './services/veiculo.service'; // 1. Importe
-import { CommonModule } from '@angular/common'; // 2. Importe
-import { RouterModule } from '@angular/router'; // 3. Importe
+import { Veiculo, VeiculoService } from './services/veiculo.service';
+import { CommonModule } from '@angular/common'; 
+import { RouterModule } from '@angular/router'; 
 
 @Component({
   selector: 'app-automovel',
-  standalone: true, // 4. Defina como standalone
-  imports: [CommonModule, RouterModule], // 5. Adicione os imports
+  standalone: true, 
+  imports: [CommonModule, RouterModule], 
   templateUrl: './automovel.component.html',
   styleUrl: './automovel.component.scss'
 })
@@ -17,7 +17,7 @@ export class AutomovelComponent implements OnInit {
 
   constructor(
     private veiculoService: VeiculoService,
-    private cdr: ChangeDetectorRef // 6. Injete o ChangeDetectorRef
+    private cdr: ChangeDetectorRef 
   ) { }
 
   ngOnInit(): void {
@@ -30,13 +30,13 @@ export class AutomovelComponent implements OnInit {
       next: (dados) => {
         this.veiculos = dados;
         this.isLoading = false;
-        this.cdr.markForCheck(); // 7. Avise o Angular para atualizar a tela
+        this.cdr.markForCheck(); 
       },
       error: (err) => {
         console.error("Erro ao carregar veículos:", err);
         this.isLoading = false;
         this.veiculos = [];
-        this.cdr.markForCheck(); // Avise mesmo em caso de erro
+        this.cdr.markForCheck(); 
       }
     });
   }
@@ -45,7 +45,7 @@ export class AutomovelComponent implements OnInit {
     if (confirm('Tem certeza que deseja excluir este veículo?')) {
       this.veiculoService.removerVeiculo(id).subscribe(() => {
         alert('Veículo removido com sucesso!');
-        this.carregarVeiculos(); // Recarrega a lista
+        this.carregarVeiculos(); 
       });
     }
   }
