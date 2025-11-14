@@ -25,7 +25,7 @@ public class Pagamento {
     private BigDecimal valor;
 
     @Column(length = 50)
-    private String formaPagamento; // Ex: "Cartão", "Dinheiro"
+    private String formaPagamento; // Ex: "Cartão", "PIX"
 
     @Column(length = 20)
     private String status; // Ex: "Pendente", "Pago"
