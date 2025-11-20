@@ -16,3 +16,4 @@ public class MovimentacaoService {
         movimentacoes.add(new Movimentacao(1L, "CRI-2578", LocalDateTime.now().minusHours(2), null, null, true));
         movimentacoes.add(new Movimentacao(2L, "XYZ-1234", LocalDateTime.now().minusHours(3), LocalDateTime.now().minusHours(1), 25.0, false));
     }
+}

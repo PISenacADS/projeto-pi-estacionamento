@@ -55,7 +55,7 @@ export const routes: Routes = [
       ]
     },
 
-   { path: '', redirectTo: '/padrao/login', pathMatch: 'full' },
-   { path: '**', redirectTo: '/padrao/login' }
+   //{ path: '', redirectTo: '/padrao/login', pathMatch: 'full' },
+   //{ path: '**', redirectTo: '/padrao/login' }
 
 ];
