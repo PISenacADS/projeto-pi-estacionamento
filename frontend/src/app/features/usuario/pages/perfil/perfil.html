@@ -1,66 +1,74 @@
 
-    <div class="container" id="app">
+<div class="container" id="app" *ngIf="!isLoading && usuario">
         
-        <div class="header-block">
-            <div class="balance">R$ 25,00</div>
-            <div class="user-info">
-                <div class="user-icon-container">
-                    <i class="fa-solid fa-user"></i>
-                </div>
-                <p>Olá, Fulano</p>
-            </div>
-        </div>
-
-        <div class="info-block">
-            <h2>Informações Pessoais</h2>
-            <div class="personal-details">
-                <div class="input-group">
-                    <input type="text" id="nome" value="Nome: Fulano" readonly>
-                </div>
-                <div class="input-group">
-                    <input type="text" id="sobrenome" value="Sobrenome: Silva" readonly>
-                </div>
-                <div class="input-group">
-                    <input type="email" id="email" value="Email: Fulano@gmail.com" readonly>
-                </div>
-                <div class="input-group">
-                    <input type="tel" id="telefone" value="Telefone: (11) 9374-23654" readonly>
-                </div>
-            </div>
-        </div>
-
-        <div class="info-block">
-            <h2>Meus Veículos</h2>
-            
-            <div class="vehicle-item active">
-               <img src="assets/images/carro-amarelo.png" alt="Carro Amarelo" class="car-image">
-                <div class="vehicle-details">
-                    <p class="license-plate">Placa: ABC - 1234</p>
-                    <p class="model">Modelo: Chevrolet Onix</p>
-                </div>
-                <div class="status-badge active-status">
-                    <i class="fa-solid fa-circle-check"></i>
-                    <span>Ativo</span>
-                </div>
+    <div class="header-block">
+      
+        <div class="balance">R$ {{ usuario.saldo || '0,00' }}</div>
+        <div class="user-info">
+            <div class="user-icon-container">
+                <i class="fa-solid fa-user"></i>
             </div>
             
-            <div class="vehicle-item inactive">
-               <img src="assets/images/carro-amarelo.png" alt="Carro Amarelo" class="car-image">
-                <div class="vehicle-details">
-                    <p class="license-plate">Placa: ABC - 1234</p>
-                    <p class="model">Modelo: Chevrolet Onix</p>
-                </div>
-                <div class="status-badge inactive-status">
-                    <i class="fa-solid fa-circle-xmark"></i>
-                    <span>Inativo</span>
-                </div>
-            </div>
-
-            <div class="button-container">
-                <button class="add-vehicle-button">Adicionar Novo Veículo</button>
-            </div>
-
+            <p>Olá, {{ usuario.nome }}</p>
         </div>
     </div>
-    
-    <script src="Telacliente.js"></script> 
+
+    <div class="info-block">
+        <h2>Informações Pessoais</h2>
+        <div class="personal-details">
+            <div class="input-group">
+               
+                <input type="text" id="nome" [value]="'Nome: ' + usuario.nome" readonly>
+            </div>
+            
+            <div class="input-group">
+                <input type="email" id="email" [value]="'Email: ' + usuario.email" readonly>
+            </div>
+            <div class="input-group">
+                <input type="tel" id="telefone" [value]="'Telefone: ' + usuario.telefone" readonly>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-block">
+        <h2>Meus Veículos</h2>
+        
+        <div *ngFor="let carro of veiculos">
+           
+            <div class="vehicle-item" [ngClass]="carro.situacao ? 'active' : 'inactive'">
+               
+               <img src="assets/images/carro-amarelo.png" alt="Carro" class="car-image">
+               
+               <div class="vehicle-details">
+                   <p class="license-plate">Placa: {{ carro.placa }}</p>
+                   <p class="model">Modelo: {{ carro.modelo }} - {{ carro.cor }}</p>
+               </div>
+               
+               <div class="status-badge active-status" *ngIf="carro.situacao">
+                   <i class="fa-solid fa-circle-check"></i>
+                   <span>Ativo</span>
+               </div>
+
+               <div class="status-badge inactive-status" *ngIf="!carro.situacao">
+                   <i class="fa-solid fa-circle-xmark"></i>
+                   <span>Inativo</span>
+               </div>
+            </div>
+        </div>
+
+        <div *ngIf="veiculos.length === 0" style="text-align: center; padding: 20px; color: #777;">
+            <p>Nenhum veículo encontrado.</p>
+        </div>
+
+        <div class="button-container">
+            <a routerLink="/usuario/cadastro2veic" >
+            <button class="add-vehicle-button">Adicionar Novo Veículo</button>
+            </a>
+        </div>
+
+    </div>
+</div>
+
+<div *ngIf="isLoading" style="text-align: center; padding: 50px;">
+    <p>Carregando perfil...</p>
+</div>

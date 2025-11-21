@@ -1,17 +1,21 @@
 package com.example.demo.service;
 
+import com.example.demo.model.Usuario;
 import com.example.demo.model.Veiculo;
+import com.example.demo.repository.UsuarioRepository; // IMPORTANTE
 import com.example.demo.repository.VeiculoRepository; 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
-
 
 @Service
 public class VeiculoService {
 
     @Autowired
     private VeiculoRepository veiculoRepository; 
+
+    @Autowired
+    private UsuarioRepository usuarioRepository; 
 
     public List<Veiculo> listarVeiculos() {
         return veiculoRepository.findAll(); 
@@ -22,6 +26,16 @@ public class VeiculoService {
     }
 
     public Veiculo adicionarVeiculo(Veiculo veiculo) {
+        
+        if (veiculo.getUsuario() != null && veiculo.getUsuario().getId() != null) {
+            
+            Usuario usuarioReal = usuarioRepository.findById(veiculo.getUsuario().getId()).orElse(null);
+            
+            if (usuarioReal != null) {
+                veiculo.setUsuario(usuarioReal);
+            }
+        }
+        
         return veiculoRepository.save(veiculo);
     }
 
@@ -32,7 +46,11 @@ public class VeiculoService {
             veiculoExistente.setModelo(veiculoAtualizado.getModelo());
             veiculoExistente.setCor(veiculoAtualizado.getCor());
             veiculoExistente.setSituacao(veiculoAtualizado.isSituacao());
-            veiculoExistente.setCliente(veiculoAtualizado.getCliente());
+            
+            if (veiculoAtualizado.getUsuario() != null) {
+                veiculoExistente.setUsuario(veiculoAtualizado.getUsuario());
+            }
+            
             return veiculoRepository.save(veiculoExistente);
         }
         return null;

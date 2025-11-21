@@ -1,39 +1,36 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { PerfilService } from './services/perfil.service';
+import { AutomovelRoutingModule } from "../../../admin/pages/automovel/automovel-routing.module";
 
 @Component({
   selector: 'app-perfil',
   standalone: true,
-  imports: [  CommonModule],
-  templateUrl:   './perfil.html',
+  imports: [CommonModule, AutomovelRoutingModule],
+  templateUrl: './perfil.html',
   styleUrl: './perfil.scss'
 })
-export class PerfilComponent {
+export class PerfilComponent implements OnInit {
+  usuario: any = null;
+  veiculos: any[] = [];
+  isLoading = true;
 
-  balance: number = 25.00;
+  constructor(private perfilService: PerfilService, private cdr: ChangeDetectorRef) {}
 
-  user = {
-    nome: "Fulano",
-    sobrenome: "Silva",
-    email: "Fulano@gmail.com",
-    telefone: "(11) 9374-23654"
-  };
-
-  vehicles = [
-    {
-      placa: "ABC - 1234",
-      modelo: "Chevrolet Onix",
-      imagem: "assets/images/carro-amarelo.png",
-      ativo: true
-    },
-    {
-      placa: "XYZ - 9876",
-      modelo: "Honda Fit",
-      imagem: "assets/images/carro-amarelo.png",
-      ativo: false
+  ngOnInit(): void {
+    const email = this.perfilService.getEmailDoToken();
+    if (email) {
+      this.perfilService.getDadosUsuario(email).subscribe({
+        next: (user) => {
+          this.usuario = user;
+          this.perfilService.getVeiculosUsuario(user.id).subscribe(carros => {
+            this.veiculos = carros;
+            this.isLoading = false;
+            this.cdr.markForCheck();
+          });
+        },
+        error: () => this.isLoading = false
+      });
     }
-  ];
-
-  constructor() { }
-  
+  }
 }

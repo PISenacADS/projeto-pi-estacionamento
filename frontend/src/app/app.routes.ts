@@ -15,7 +15,7 @@ import { Temporizador2Component } from './features/usuario/pages/temporizador2/t
 import { VeiculosComponent } from './features/usuario/pages/veiculos/veiculos';
 import { CadastroComponente } from './features/usuario/pages/cadastro/cadastro';
 import { PadraoLayout } from './layouts/admin-layout/padrao-layout/padrao-layout';
-import { cadastro2Component } from './features/usuario/pages/cadastro2veic/cadastro2';
+import { Cadastro2Component } from './features/usuario/pages/cadastro2veic/cadastro2';
 
 export const routes: Routes = [
     {
@@ -41,7 +41,7 @@ export const routes: Routes = [
       { path: 'temporizador', component: TemporizadorComponent},
       { path: 'temporizador2', component: Temporizador2Component},
       { path: 'veiculos', component: VeiculosComponent},
-      { path: 'cadastro2veic', component: cadastro2Component},
+      { path: 'cadastro2veic', component: Cadastro2Component},
       { path: '', redirectTo: 'Home', pathMatch: 'full' }
     ]
   },

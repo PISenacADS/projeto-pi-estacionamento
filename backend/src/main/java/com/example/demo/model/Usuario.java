@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,4 +32,9 @@ public class Usuario {
 
     @Column(nullable = false)
     private String role = "CLIENTE";
+
+    private Double saldo = 0.0;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<Veiculo> veiculos;
 }

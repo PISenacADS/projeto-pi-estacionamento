@@ -25,14 +25,14 @@ public class Pagamento {
     private BigDecimal valor;
 
     @Column(length = 50)
-    private String formaPagamento; // Ex: "Cartão", "PIX"
+    private String formaPagamento; 
 
     @Column(length = 20)
-    private String status; // Ex: "Pendente", "Pago"
+    private String status; 
 
     private LocalDateTime dataPagamento;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cliente_id", nullable = false)
-    private Cliente cliente;
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario;
 }

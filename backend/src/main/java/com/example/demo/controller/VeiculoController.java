@@ -24,6 +24,9 @@ public class VeiculoController {
     @Autowired
     private VeiculoService veiculoService;
 
+    @Autowired
+    private com.example.demo.repository.VeiculoRepository veiculoRepository;
+
     @GetMapping
     public List<Veiculo> listarVeiculos() {
         return veiculoService.listarVeiculos();
@@ -32,6 +35,11 @@ public class VeiculoController {
     @GetMapping("/{id}")
     public Veiculo buscarPorId(@PathVariable Long id) {
         return veiculoService.buscarPorId(id);
+    }
+
+    @GetMapping("/usuario/{usuarioId}")
+    public List<Veiculo> listarPorUsuario(@PathVariable Long usuarioId) {
+        return veiculoRepository.findByUsuarioId(usuarioId);
     }
 
     @PostMapping
@@ -44,7 +52,6 @@ public class VeiculoController {
         return veiculoService.atualizarVeiculo(id, veiculo);
     }
 
-    
     @DeleteMapping("/{id}")
     public String removerVeiculo(@PathVariable Long id) {
         boolean removido = veiculoService.removerVeiculo(id);
