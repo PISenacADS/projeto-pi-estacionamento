@@ -17,24 +17,23 @@ public class ReservaService {
     @Autowired
     private VagaRepository vagaRepository;
 
+    @SuppressWarnings("unused")
     public Reserva criarReserva(Reserva reserva) {
-        Vaga vaga = vagaRepository.findById(reserva.getVaga().getId())
-                .orElseThrow(() -> new RuntimeException("Vaga não encontrada"));
+    Vaga vaga = vagaRepository.findById(reserva.getVaga().getId())
+            .orElseThrow(() -> new RuntimeException("Vaga não encontrada"));
 
-        if (!vaga.isDisponivel()) {
-            throw new RuntimeException("Vaga já ocupada!");
-        }
-
-        long horas = Duration.between(reserva.getDataEntrada(), reserva.getDataSaida()).toHours();
-        double valor = horas * vaga.getPrecoHora();
-
-        reserva.setValorTotal(valor);
-
-        vaga.setDisponivel(false);
-        vagaRepository.save(vaga);
-
-        return reservaRepository.save(reserva);
+    if (vaga.getDisponivel() <= 0) {
+        throw new RuntimeException("Estacionamento lotado para este tipo de vaga!");
     }
+
+    long horas = Duration.between(reserva.getDataEntrada(), reserva.getDataSaida()).toHours();
+
+    vaga.setDisponivel(vaga.getDisponivel() - 1);
+    
+    vagaRepository.save(vaga); 
+
+    return reservaRepository.save(reserva);
+}
 
     public List<Reserva> listarTodas() {
         return reservaRepository.findAll();

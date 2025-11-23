@@ -15,7 +15,7 @@ public class Vaga {
     private Long id;
 
     private String tipo; 
-    private boolean disponivel = true;
+    private Integer disponivel;
 
     private Double precoHora; 
 }
