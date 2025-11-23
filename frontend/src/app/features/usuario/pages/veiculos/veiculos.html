@@ -1,73 +1,84 @@
-  <header class="header">
-    <span class="user-name">Fulano</span>
-    <div class="user-icon">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-           viewBox="0 0 24 24" fill="none" stroke="currentColor"
-           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
-        <circle cx="12" cy="7" r="4"/>
-      </svg>
+<header class="header">
+  <span class="user-name">Olá, {{ usuarioNome }}</span>
+  <div class="user-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+      <circle cx="12" cy="7" r="4" />
+    </svg>
+  </div>
+</header>
+
+<main class="container">
+  
+  <section class="main-card">
+    <h2>Meus Veículos</h2>
+
+    <div *ngIf="listaVeiculos.length === 0" style="text-align: center; color: #888; padding: 20px;">
+      Nenhum veículo cadastrado.
     </div>
-  </header>
 
-  <main class="container">
-    <section class="main-card">
-      <h2>Meus Veículos</h2>
+    <div class="vehicle-info" *ngFor="let veic of listaVeiculos" style="border-bottom: 1px solid #eee; margin-bottom: 20px; padding-bottom: 10px;">
+      
+      <div class="info-group">
+        <p>Placa</p>
+        <span style="font-weight: bold;">{{ veic.placa }}</span>
+      </div>
 
-      <div class="vehicle-info">
-        <div class="info-group">
-          <p>Placa</p>
-          <span>CRI-2578</span>
-        </div>
+      <div class="info-group">
+        <p>Modelo</p>
+        <span>{{ veic.modelo }}</span>
+      </div>
 
-        <div class="info-group">
-          <p>Modelo</p>
-          <span>Vectra</span>
-        </div>
-
-        <div class="info-group">
-          <p>Cor</p>
-          <span class="color-dot"></span>
-        </div>
-
-        <div class="info-group">
-          <p>Situação</p>
-          <span class="status ativo">Ativo</span>
+      <div class="info-group">
+        <p>Cor</p>
+        <div style="display: flex; align-items: center; gap: 5px;">
+          
+           <span class="color-dot" [style.background-color]="veic.cor"></span>
+           <span style="font-size: 0.8rem;">{{ veic.cor }}</span>
         </div>
       </div>
+
+      <div class="info-group">
+        <p>Situação</p>
+        <span class="status" [class.ativo]="veic.situacao" [class.inativo]="!veic.situacao">
+          {{ veic.situacao ? 'Ativo' : 'Inativo' }}
+        </span>
+      </div>
+    </div>
+    
+    <button style="width: 100%; padding: 10px; margin-top: 10px; border: 1px dashed #ccc; background: none; cursor: pointer;" 
+            routerLink="/usuario/pages/cadastro/cadastro2veic">
+      + Cadastrar Novo
+    </button>
+  </section>
+
+  <div class="bottom-section">
+    
+    <section class="card-inferior movimentacoes-card">
+      <h3>Últimas Movimentações</h3>
+      <ul>
+        <li *ngFor="let mov of listaMovimentacoes">
+          
+           {{ mov.entrada | date:'dd/MM' }} às {{ mov.entrada | date:'HH:mm' }}
+           
+           <span class="duration" *ngIf="!mov.ativa">Finalizado</span>
+           <span class="duration" *ngIf="mov.ativa" style="background: #e67e22; color: white;">Aberto</span>
+        </li>
+        <li *ngIf="listaMovimentacoes.length === 0">Sem histórico recente.</li>
+      </ul>
     </section>
 
-    <div class="bottom-section">
-      <section class="card-inferior movimentacoes-card">
-        <h3>Últimas Movimentações</h3>
-        <ul>
-          <li>29/09 às 15h <span class="duration">2h</span></li>
-          <li>30/09 às 18h <span class="duration">3h</span></li>
-        </ul>
-      </section>
+    <section class="card-inferior relatorio-card">
+      <h3>Relatório Mensal</h3>
+      <ul class="relatorios">
+        
+        <li *ngFor="let rel of listaRelatorios" (click)="baixarPDF()" style="cursor: pointer;">
+          {{ rel.label }}
+          <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="Ícone PDF" class="pdf-icon-image">
+        </li>
 
-      <section class="card-inferior relatorio-card">
-        <h3>Relatório Mensal</h3>
-        <ul class="relatorios">
-          <li>01/09 até 30/09 
-            <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="Ícone PDF" class="pdf-icon-image">
-          </li>
-          <li>01/10 até 31/10 
-            <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="Ícone PDF" class="pdf-icon-image">
-          </li>
-          <li>01/11 até 30/11 
-            <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="Ícone PDF" class="pdf-icon-image">
-          </li>
-          <li>01/12 até 31/12 
-            <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="Ícone PDF" class="pdf-icon-image">
-          </li>
-          <li>01/01 até 31/01 
-            <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="Ícone PDF" class="pdf-icon-image">
-          </li>
-        </ul>
-      </section>
-    </div>
-  </main>
-
-
-
+      </ul>
+    </section>
+  </div>
+</main>
