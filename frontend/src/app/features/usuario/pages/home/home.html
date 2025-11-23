@@ -1,102 +1,96 @@
-   <div class="app-container">  
-    <!-- Header -->
-    <header class="app-header">
-      <h1 class="main-title">Home</h1>
-      <div class="user-info">
-        <span class="username">Fulano</span>
-        <div class="user-icon">
-          <!-- Ícone de usuário (SVG) -->
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <circle cx="12" cy="8" r="4" />
-            <path d="M4 20c0-4 16-4 16 0" />
+<div class="app-container">
+  <header class="app-header">
+    <h1 class="main-title">Home</h1>
+    <div class="user-info">
+      <span class="username">Olá, {{ usuarioNome }}</span>
+      <div class="user-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <circle cx="12" cy="8" r="4" />
+          <path d="M4 20c0-4 16-4 16 0" />
+        </svg>
+      </div>
+    </div>
+  </header>
+
+  <div class="dashboard-grid">
+
+    <div class="dashboard-block balance-block">
+      <h2 class="block-title">Saldo $</h2>
+      <div class="balance-content">
+        <p class="balance-label">Meu Saldo</p>
+       
+        <p class="balance-amount">{{ saldoUsuario | currency:'BRL':'symbol':'1.2-2' }}</p>
+      </div>
+      <button class="primary-button button">Adicionar + Saldo</button>
+    </div>
+
+    <div class="dashboard-block movements-block">
+      <h2 class="block-title">Últimas Movimentações</h2>
+
+      <div *ngIf="!listaMovimentacoes || listaMovimentacoes.length === 0" class="empty-state">
+        <p>Nenhuma movimentação encontrada.</p>
+      </div>
+
+      <div class="movement-item" *ngFor="let mov of listaMovimentacoes">
+        <div class="movement-icon" [class.active-icon]="mov.ativa">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 15 14"></polyline>
           </svg>
         </div>
-      </div>
-    </header>
-
-    <!-- Grid principal -->
-    <div class="dashboard-grid">
-      
-      <!-- Bloco de Saldo -->
-      <div class="dashboard-block balance-block">
-        <h2 class="block-title">Saldo $</h2>
-        <div class="balance-content">
-          <p class="balance-label">Meu Saldo</p>
-          <p class="balance-amount">R$ 25,00</p>
+        <div class="movement-details">
+          <p class="plate-text">{{ mov.placa }}</p>
+          <p class="date-text">
+            {{ mov.entrada | date:'dd/MM HH:mm' }}
+            <span *ngIf="!mov.ativa">- Saiu às {{ mov.saida | date:'HH:mm' }}</span>
+          </p>
         </div>
-        <button class="primary-button button">Adicionar + Saldo</button>
+        <div class="movement-value">
+          <span *ngIf="mov.ativa" class="status-open">Em aberto</span>
+          <span *ngIf="!mov.ativa">{{ mov.valor | currency:'BRL':'symbol':'1.2-2' }}</span>
+        </div>
       </div>
 
-      <!-- Bloco de Movimentações -->
-      <div class="dashboard-block movements-block">
-  <h2 class="block-title">Últimas Movimentações</h2>
-
-  <div class="movement-item">
-    <div class="movement-icon" aria-hidden="true">
-      <!-- Ícone de relógio -->
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="10"></circle>
-        <polyline points="12 6 12 12 15 14"></polyline>
-      </svg>
+      <button class="button secondary-button">Histórico Completo</button>
     </div>
 
-    <div class="movement-details">
-      <p>Hoje, bloco 345</p>
-      <p>Estacionamento A</p>
+
+    <div class="dashboard-block vehicles-block">
+      <h2 class="block-title">Meus Veículos</h2>
+
+      <div *ngIf="!listaVeiculos || listaVeiculos.length === 0" 
+           style="flex:1; display: flex; align-items: center; justify-content: center; color: #999;">
+        <p>Nenhum veículo cadastrado.</p>
+      </div>
+
+      <div class="vehicles-list" *ngIf="listaVeiculos && listaVeiculos.length > 0">
+        
+        <div class="vehicle-card" *ngFor="let veiculo of listaVeiculos">
+          <div class="vehicle-icon">
+            <img src="assets/images/carro-amarelo.png" alt="Carro">
+          </div>
+          
+          <p class="vehicle-name">{{ veiculo.modelo }}</p>
+          <p class="vehicle-plate">{{ veiculo.placa }}</p>
+          
+          <div class="status-icon" 
+               [ngClass]="veiculo.situacao ? 'active-status' : 'inactive-status'"
+               [title]="veiculo.situacao ? 'Ativo' : 'Inativo'">
+          </div>
+        </div>
+
+      </div>
+
+      <button class="add-vehicle-button button" routerLink="/usuario/cadastro2veic">
+        Adicionar Veículo
+      </button>
     </div>
 
-    <div class="movement-value">R$ 4,00</div>
+    <div class="dashboard-block notifications-block">
+      <h2 class="block-title">Notificações</h2>
+      <p class="no-notifications-message">Sem novas notificações</p>
+    </div>
+
   </div>
-
-  <div class="movement-item">
-    <div class="movement-icon" aria-hidden="true">
-      <!-- Ícone de relógio -->
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="10"></circle>
-        <polyline points="12 6 12 12 15 14"></polyline>
-      </svg>
-    </div>
-
-    <div class="movement-details">
-      <p>Hoje, bloco 567</p>
-      <p>Estacionamento B</p>
-    </div>
-
-    <div class="movement-value">R$ 8,00</div>
-  </div>
-
-  <button class="button secondary-button">Reservar</button>
 </div>
-
-      <div class="dashboard-block vehicles-block">
-        <h2 class="block-title">Meus Veículos</h2>
-        <div class="vehicles-list">
-          <div class="vehicle-card" >
-            <div class="vehicle-icon">
-              <img src="assets/images/carro-amarelo.png" alt="">
-            </div>
-            <p class="vehicle-name">Fiat Argo</p>
-            <p class="vehicle-plate">ABC-1234</p>
-            <div class="status-icon active-status"></div>
-          </div>
-
-          <div class="vehicle-card">
-            <div class="vehicle-icon">
-               <img src="assets/images/carro-amarelo.png" alt="">
-            </div>
-            <p class="vehicle-name">Chevrolet Onix</p>
-            <p class="vehicle-plate">XYZ-9876</p>
-            <div class="status-icon inactive-status"></div>
-          </div>
-        </div>
-        <button class="add-vehicle-button button">Adicionar novo Veículo</button>
-      </div>
-
-      <div class="dashboard-block notifications-block">
-        <h2 class="block-title">Notificações</h2>
-        <p class="no-notifications-message">Sem novas notificações</p>
-      </div>
-
-    </div>
-  </div>
-
