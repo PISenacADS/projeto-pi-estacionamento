@@ -1,1 +1,95 @@
-<p>reserva works!</p>
+<div class="main-container">
+  <h2 class="page-title">SELECIONE O PERIODO DA RESERVA</h2>
+
+  <div class="booking-card">
+    
+    <div class="inputs-container">
+      <div class="input-group">
+        <div class="input-box">
+          <label>Data de entrada</label>
+          <div class="field-wrapper">
+            <input type="text" value="21/08/25">
+            <i class="bi bi-calendar"></i>
+          </div>
+        </div>
+        <div class="input-box">
+          <label>Data de saída</label>
+          <div class="field-wrapper">
+            <input type="text" value="25/08/25">
+            <i class="bi bi-calendar"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <div class="input-box">
+          <label>Hora de entrada</label>
+          <div class="field-wrapper">
+            <input type="text" value="21:00">
+            <i class="bi bi-clock"></i>
+          </div>
+        </div>
+        <div class="input-box">
+          <label>Hora de saída</label>
+          <div class="field-wrapper">
+            <input type="text" value="17:00">
+            <i class="bi bi-clock"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="parking-options">
+      <div class="option-card selected">
+        <div class="icon-circle orange">
+          <i class="bi bi-car-front-fill"></i>
+        </div>
+        <div class="option-details">
+          <strong>Vaga descoberta</strong>
+          <span>Estacione em uma vaga descoberta</span>
+        </div>
+        <div class="checkbox checked">
+          <i class="bi bi-check"></i>
+        </div>
+      </div>
+
+      <div class="option-card">
+        <div class="icon-circle purple">
+          <i class="bi bi-house-door"></i>
+        </div>
+        <div class="option-details">
+          <strong>Vaga coberta</strong>
+          <span>Estacione em uma vaga coberta</span>
+        </div>
+        <div class="checkbox"></div>
+      </div>
+    </div>
+
+    <div class="summary-section">
+      <div class="summary-row">
+        <div class="col">
+          <p>Dados de entrada: 21/08</p>
+          <p>Tipo de vaga:</p>
+          <p>Período:</p>
+        </div>
+        <div class="col right-align">
+          <p>Dados de saída: 25/08</p>
+          <p>Vaga descoberta</p>
+          <p>3 dias</p>
+        </div>
+      </div>
+      
+      <hr class="divider">
+
+      <div class="total-row">
+        <span>Valor:</span>
+        <span class="price">R$30,00</span>
+      </div>
+    </div>
+
+    <div class="action-area">
+      <button class="btn-submit">Solicitar reserva</button>
+    </div>
+
+  </div>
+</div>
