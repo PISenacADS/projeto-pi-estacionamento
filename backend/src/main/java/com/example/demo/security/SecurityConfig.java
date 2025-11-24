@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity; // Adicione esta importação!
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -23,39 +23,40 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-            
-            .csrf(AbstractHttpConfigurer::disable) 
+            .csrf(AbstractHttpConfigurer::disable)
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
-               
-                .requestMatchers(HttpMethod.POST, "/api/auth/register").permitAll()
-                .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
+                // --- ZONA LIVRE (Para não travar sua apresentação) ---
                 
-                .requestMatchers(HttpMethod.POST, "/api/usuarios").permitAll()
-                .requestMatchers(HttpMethod.POST, "/api/veiculos").permitAll()
+                // Autenticação
+                .requestMatchers("/api/auth/**").permitAll()
                 
-                .requestMatchers(HttpMethod.GET, "/api/usuarios/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/api/veiculos/**").permitAll() 
-                .requestMatchers(HttpMethod.GET, "/api/financeiro/**").permitAll()
-
-                .requestMatchers(HttpMethod.POST, "/api/reservas/**").permitAll() 
-                .requestMatchers(HttpMethod.GET, "/api/reservas/**").permitAll()
-
-                .requestMatchers(HttpMethod.GET, "/api/movimentacoes/**").permitAll()
-
-                .requestMatchers(HttpMethod.PUT, "/api/reservas/**").permitAll()
-
-                .requestMatchers(HttpMethod.POST, "/api/pagamentos/**").permitAll()
+                // Cadastros Básicos (GET e POST)
+                .requestMatchers("/api/usuarios/**").permitAll()
+                .requestMatchers("/api/veiculos/**").permitAll()
                 
+                // Funcionalidades (Reserva, Movimentação, Pagamento)
+                .requestMatchers("/api/reservas/**").permitAll()
+                .requestMatchers("/api/movimentacoes/**").permitAll()
+                .requestMatchers("/api/pagamentos/**").permitAll()
+                
+                // Dashboard Financeiro
+                .requestMatchers("/api/financeiro/**").permitAll()
+                
+                // Swagger e Erros
+                .requestMatchers("/error").permitAll()
+                .requestMatchers("/v3/api-docs/**", "/swagger-ui/**").permitAll()
+                
+                // Se sobrar algo, exige autenticação (mas cobrimos quase tudo acima)
                 .anyRequest().authenticated()
             );
+
         return http.build();
     }
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200")); 
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS")); 
         configuration.setAllowedHeaders(Arrays.asList("*")); 

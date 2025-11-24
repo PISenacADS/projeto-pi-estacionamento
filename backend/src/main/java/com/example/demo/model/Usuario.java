@@ -1,11 +1,11 @@
 package com.example.demo.model;
 
-import java.util.List;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Data
 @AllArgsConstructor
@@ -36,5 +36,10 @@ public class Usuario {
     private Double saldo = 0.0;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @JsonIgnore 
     private List<Veiculo> veiculos;
+    
+    @OneToMany(mappedBy = "usuario")
+    @JsonIgnore
+    private List<Pagamento> pagamentos;
 }

@@ -3,6 +3,9 @@ package com.example.demo.model;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -11,7 +14,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "pagamentos") 
+@Table(name = "pagamentos")
+// Esta linha evita erros com FetchType.LAZY
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Pagamento {
 
     @Id
@@ -30,9 +35,11 @@ public class Pagamento {
     @Column(length = 20)
     private String status; 
 
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime dataPagamento;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_id", nullable = false)
+    @JsonIgnore // <--- OBRIGATÓRIO: Corta o loop infinito aqui
     private Usuario usuario;
 }
