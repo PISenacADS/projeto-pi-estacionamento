@@ -176,3 +176,21 @@
 .pdf-icon-image:hover {
   transform: scale(1.2);
 }
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.profile-link {
+  display: flex;         
+  align-items: center;    
+  gap: 10px;              
+  text-decoration: none;  
+  color: inherit;         
+  cursor: pointer;       
+  
+  &:hover {
+    opacity: 0.8;         
+  }
+}

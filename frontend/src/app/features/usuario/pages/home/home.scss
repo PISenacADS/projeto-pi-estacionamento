@@ -13,6 +13,24 @@
   margin-bottom: 25px;
 }
 
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.profile-link {
+  display: flex;         
+  align-items: center;    
+  gap: 10px;              
+  text-decoration: none;  
+  color: inherit;         
+  cursor: pointer;       
+  
+  &:hover {
+    opacity: 0.8;         
+  }
+}
+
 .main-title {
   font-size: 2.5em;
   font-weight: bold;

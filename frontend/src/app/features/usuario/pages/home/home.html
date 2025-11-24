@@ -2,13 +2,15 @@
   <header class="app-header">
     <h1 class="main-title">Home</h1>
     <div class="user-info">
-      <span class="username">Olá, {{ usuarioNome }}</span>
-      <div class="user-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <circle cx="12" cy="8" r="4" />
-          <path d="M4 20c0-4 16-4 16 0" />
-        </svg>
-      </div>
+      <a routerLink="/usuario/perfil" class="profile-link">
+          <span class="username">Olá, {{ usuarioNome }}</span>
+          <div class="user-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 20c0-4 16-4 16 0" />
+            </svg>
+          </div>
+      </a>
     </div>
   </header>
 
@@ -51,8 +53,8 @@
           <span *ngIf="!mov.ativa">{{ mov.valor | currency:'BRL':'symbol':'1.2-2' }}</span>
         </div>
       </div>
-
-      <button class="button secondary-button">Histórico Completo</button>
+      
+      <button class="button secondary-button" routerLink="/usuario/reserva">Reservar</button>
     </div>
 
 

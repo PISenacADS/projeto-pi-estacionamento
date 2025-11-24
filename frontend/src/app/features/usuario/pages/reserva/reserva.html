@@ -6,14 +6,16 @@
     <div class="inputs-container" style="margin-bottom: 20px;">
       <div class="input-box" style="width: 100%;">
         <label>Qual veículo vai estacionar?</label>
-        <div class="field-wrapper">
+        <div class="field-wrapper select-wrapper">
           <select [(ngModel)]="veiculoSelecionadoId" class="custom-select">
+            <option [ngValue]="null" disabled selected>Selecione um carro...</option>
             <option *ngFor="let carro of meusVeiculos" [value]="carro.id">
               {{ carro.modelo }} - {{ carro.placa }}
             </option>
             <option *ngIf="meusVeiculos.length === 0" disabled>Nenhum veículo cadastrado</option>
           </select>
-          <i class="bi bi-car-front"></i>
+          <i class="bi bi-car-front icon-select"></i>
+          <i class="bi bi-chevron-down arrow-icon"></i>
         </div>
       </div>
     </div>
@@ -86,10 +88,14 @@
     <div class="summary-section">
       <div class="summary-row">
         <div class="col">
+         
+          <p style="color: #6a4dfc; font-weight: 600;">Aeroporto de Congonhas</p>
+          
           <p>Entrada: {{ dataEntrada | date:'dd/MM' }} às {{ horaEntrada }}</p>
           <p>Tipo: {{ tipoVaga === 1 ? 'Descoberta' : 'Coberta' }}</p>
         </div>
         <div class="col right-align">
+          <p>&nbsp;</p> 
           <p>Saída: {{ dataSaida | date:'dd/MM' }} às {{ horaSaida }}</p>
           <p>{{ tempoTotalHoras }} horas est.</p>
         </div>
