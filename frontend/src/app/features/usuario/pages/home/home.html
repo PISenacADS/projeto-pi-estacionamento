@@ -3,13 +3,13 @@
     <h1 class="main-title">Home</h1>
     <div class="user-info">
       <a routerLink="/usuario/perfil" class="profile-link">
-          <span class="username">Olá, {{ usuarioNome }}</span>
-          <div class="user-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-              <circle cx="12" cy="8" r="4" />
-              <path d="M4 20c0-4 16-4 16 0" />
-            </svg>
-          </div>
+        <span class="username">Olá, {{ usuarioNome }}</span>
+        <div class="user-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <circle cx="12" cy="8" r="4" />
+            <path d="M4 20c0-4 16-4 16 0" />
+          </svg>
+        </div>
       </a>
     </div>
   </header>
@@ -20,10 +20,12 @@
       <h2 class="block-title">Saldo $</h2>
       <div class="balance-content">
         <p class="balance-label">Meu Saldo</p>
-       
+
         <p class="balance-amount">{{ saldoUsuario | currency:'BRL':'symbol':'1.2-2' }}</p>
       </div>
-      <button class="primary-button button">Adicionar + Saldo</button>
+      <button class="primary-button button" routerLink="/usuario/adicionarsaldo">
+        Adicionar + Saldo
+      </button>
     </div>
 
     <div class="dashboard-block movements-block">
@@ -53,7 +55,7 @@
           <span *ngIf="!mov.ativa">{{ mov.valor | currency:'BRL':'symbol':'1.2-2' }}</span>
         </div>
       </div>
-      
+
       <button class="button secondary-button" routerLink="/usuario/reserva">Reservar</button>
     </div>
 
@@ -61,24 +63,23 @@
     <div class="dashboard-block vehicles-block">
       <h2 class="block-title">Meus Veículos</h2>
 
-      <div *ngIf="!listaVeiculos || listaVeiculos.length === 0" 
-           style="flex:1; display: flex; align-items: center; justify-content: center; color: #999;">
+      <div *ngIf="!listaVeiculos || listaVeiculos.length === 0"
+        style="flex:1; display: flex; align-items: center; justify-content: center; color: #999;">
         <p>Nenhum veículo cadastrado.</p>
       </div>
 
       <div class="vehicles-list" *ngIf="listaVeiculos && listaVeiculos.length > 0">
-        
+
         <div class="vehicle-card" *ngFor="let veiculo of listaVeiculos">
           <div class="vehicle-icon">
             <img src="assets/images/carro-amarelo.png" alt="Carro">
           </div>
-          
+
           <p class="vehicle-name">{{ veiculo.modelo }}</p>
           <p class="vehicle-plate">{{ veiculo.placa }}</p>
-          
-          <div class="status-icon" 
-               [ngClass]="veiculo.situacao ? 'active-status' : 'inactive-status'"
-               [title]="veiculo.situacao ? 'Ativo' : 'Inativo'">
+
+          <div class="status-icon" [ngClass]="veiculo.situacao ? 'active-status' : 'inactive-status'"
+            [title]="veiculo.situacao ? 'Ativo' : 'Inativo'">
           </div>
         </div>
 

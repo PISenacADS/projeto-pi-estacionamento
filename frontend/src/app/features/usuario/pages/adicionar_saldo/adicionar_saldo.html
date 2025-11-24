@@ -1,0 +1,54 @@
+<div class="payment-container">
+  <h2 class="page-title">Adicionar Saldo</h2>
+
+  <div class="payment-card">
+    
+    <div class="section">
+      <h3>Quanto você quer adicionar?</h3>
+      <div class="value-input-wrapper">
+        <span>R$</span>
+        <input type="number" [(ngModel)]="valorSelecionado" placeholder="0,00" min="1">
+      </div>
+
+      <div class="quick-values">
+        <button (click)="selecionarValor(20)" [class.active]="valorSelecionado === 20">R$ 20</button>
+        <button (click)="selecionarValor(50)" [class.active]="valorSelecionado === 50">R$ 50</button>
+        <button (click)="selecionarValor(100)" [class.active]="valorSelecionado === 100">R$ 100</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Forma de Pagamento</h3>
+      
+      <div class="methods-grid">
+
+        <div class="method-card" 
+             [class.selected]="metodoPagamento === 'pix'"
+             (click)="metodoPagamento = 'pix'">
+          <div class="icon-box green">
+            <i class="bi bi-qr-code"></i>
+          </div>
+          <span>PIX</span>
+          <div class="check-circle"></div>
+        </div>
+
+        <div class="method-card" 
+             [class.selected]="metodoPagamento === 'cartao'"
+             (click)="metodoPagamento = 'cartao'">
+          <div class="icon-box blue">
+            <i class="bi bi-credit-card"></i>
+          </div>
+          <span>Cartão de Crédito</span>
+          <div class="check-circle"></div>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-pay" (click)="confirmarPagamento()" [disabled]="processando || valorSelecionado <= 0">
+      {{ processando ? 'Processando...' : 'Pagar R$ ' + (valorSelecionado | number:'1.2-2') }}
+    </button>
+
+    <button class="btn-cancel" routerLink="/usuario/home">Cancelar</button>
+
+  </div>
+</div>

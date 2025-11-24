@@ -16,6 +16,7 @@ import { VeiculosComponent } from './features/usuario/pages/veiculos/veiculos';
 import { CadastroComponente } from './features/usuario/pages/cadastro/cadastro';
 import { PadraoLayout } from './layouts/admin-layout/padrao-layout/padrao-layout';
 import { Cadastro2Component } from './features/usuario/pages/cadastro2veic/cadastro2';
+import { AdicionarSaldoComponent } from './features/usuario/pages/adicionar_saldo/adicionarsaldo';
 
 export const routes: Routes = [
     {
@@ -42,6 +43,7 @@ export const routes: Routes = [
       { path: 'temporizador2', component: Temporizador2Component},
       { path: 'veiculos', component: VeiculosComponent},
       { path: 'cadastro2veic', component: Cadastro2Component},
+      { path: 'adicionarsaldo', component: AdicionarSaldoComponent},
       { path: '', redirectTo: 'Home', pathMatch: 'full' }
     ]
   },

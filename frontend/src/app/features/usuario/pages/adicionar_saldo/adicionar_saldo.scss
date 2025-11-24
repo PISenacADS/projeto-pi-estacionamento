@@ -1,0 +1,179 @@
+$primary: #6a4dfc;
+$bg-light: #f4f6f9;
+
+.payment-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.page-title {
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.payment-card {
+  background: #e3ecf9;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.section {
+  margin-bottom: 30px;
+  
+  h3 {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 15px;
+  }
+}
+
+/* --- Input de Valor --- */
+.value-input-wrapper {
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 5px;
+  margin-bottom: 15px;
+
+  span {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+    margin-right: 5px;
+  }
+
+  input {
+    border: none;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: $primary;
+    width: 100%;
+    outline: none;
+    background: transparent;
+    
+    &::placeholder { color: #ddd; }
+  }
+}
+
+.quick-values {
+  display: flex;
+  gap: 10px;
+  
+  button {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #666;
+    transition: all 0.2s;
+
+    &:hover { background: #f9f9f9; }
+    
+    &.active {
+      background: $primary;
+      color: white;
+      border-color: $primary;
+    }
+  }
+}
+
+/* --- Métodos de Pagamento --- */
+.methods-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.method-card {
+  border: 2px solid #eee;
+  border-radius: 15px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s;
+
+  &:hover { border-color: lighten($primary, 20%); }
+  
+  &.selected {
+    border-color: $primary;
+    background: rgba($primary, 0.03);
+    
+    .check-circle {
+      background: $primary;
+      border-color: $primary;
+    }
+  }
+
+  .icon-box {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+
+    &.green { background: #e8f5e9; color: #4caf50; }
+    &.blue { background: #e3f2fd; color: #2196f3; }
+  }
+
+  span { font-weight: 600; color: #444; }
+
+  .check-circle {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #ddd;
+    border-radius: 50%;
+  }
+}
+
+.btn-pay {
+  width: 100%;
+  padding: 18px;
+  border: none;
+  border-radius: 50px;
+  background: $primary;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-bottom: 15px;
+  box-shadow: 0 5px 15px rgba($primary, 0.3);
+  transition: transform 0.2s;
+
+  &:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+
+  &:active { transform: scale(0.98); }
+}
+
+.btn-cancel {
+  width: 100%;
+  background: none;
+  border: none;
+  color: #888;
+  font-weight: 600;
+  cursor: pointer;
+  
+  &:hover { color: #333; }
+}
