@@ -70,7 +70,7 @@ export class CadastroComponent implements OnInit {
         
         this.cadastroService.cadastrarVeiculo(veiculoParaSalvar).subscribe({
           next: () => {
-            alert('✅ Cadastro Completo Realizado!');
+            alert('Cadastro Completo Realizado!');
             this.cadastroForm.reset();
             this.router.navigate(['/login']); 
           },

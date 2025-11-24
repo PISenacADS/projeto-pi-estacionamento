@@ -54,8 +54,8 @@ export class CadastroComponente implements OnInit {
     this.apiservice.registrar(dadosParaApi).subscribe({
 
       next: (resposta) => {
-        console.log('✅ Cadastro realizado com sucesso!', resposta);
-        alert('✅ Cadastro realizado com sucesso! Faça o login agora.');
+        console.log('Cadastro realizado com sucesso!', resposta);
+        alert('Cadastro realizado com sucesso! Faça o login agora.');
         
         this.cadastroForm.reset(); 
         
