@@ -27,9 +27,8 @@ export class CadastroComponent implements OnInit {
       nome: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
       telefone: ['', [Validators.required]],
-      senha: ['', [Validators.required, Validators.minLength(6)]], 
+      senha: ['', [Validators.required, Validators.minLength(6)]],
       
-     
       placa: ['', [Validators.required, Validators.minLength(7)]],
       modelo: ['', [Validators.required]],
       cor: ['', [Validators.required]]
@@ -39,51 +38,55 @@ export class CadastroComponent implements OnInit {
   cadastrar(): void {
     if (this.cadastroForm.invalid) {
       this.cadastroForm.markAllAsTouched();
-      alert('Preencha todos os campos obrigatórios (incluindo e-mail e senha).');
+      alert('Preencha todos os campos obrigatórios corretamente.');
       return;
     }
 
-   
     const usuarioParaSalvar = {
       nome: this.cadastroForm.value.nome,
       email: this.cadastroForm.value.email,
       telefone: this.cadastroForm.value.telefone,
       senha: this.cadastroForm.value.senha,
-      role: 'CLIENTE' 
+      role: 'CLIENTE'
     };
 
-    
     this.cadastroService.cadastrarUsuario(usuarioParaSalvar).subscribe({
       next: (usuarioCriado) => {
         
-        
-        
+        console.log('Usuário criado com ID:', usuarioCriado.id);
+
         const veiculoParaSalvar = {
           placa: this.cadastroForm.value.placa,
           modelo: this.cadastroForm.value.modelo,
           cor: this.cadastroForm.value.cor,
-          situacao: true,
-        
-          cliente: usuarioCriado 
+          situacao: true, 
+          
+          usuario: { 
+            id: usuarioCriado.id 
+          }
         };
 
-        
         this.cadastroService.cadastrarVeiculo(veiculoParaSalvar).subscribe({
           next: () => {
-            alert('Cadastro Completo Realizado!');
+            alert('Cadastro realizado com sucesso! Faça login para continuar.');
             this.cadastroForm.reset();
-            this.router.navigate(['/login']); 
+            this.router.navigate(['/admin/usuario']);
           },
           error: (erroVeiculo) => {
             console.error('Erro ao salvar veículo:', erroVeiculo);
-            alert('Usuário criado, mas erro ao salvar veículo.');
+            alert('Usuário criado, mas houve um erro ao salvar o veículo. Tente cadastrar o veículo pelo painel.');
+            this.router.navigate(['/admin/cadastro']);
           }
         });
 
       },
       error: (erroUsuario) => {
         console.error('Erro ao salvar usuário:', erroUsuario);
-        alert('Erro ao cadastrar usuário. Verifique se o e-mail já existe.');
+        if (erroUsuario.status === 409 || (erroUsuario.error && erroUsuario.error.message?.includes('email'))) {
+             alert('Erro: Este e-mail já está cadastrado.');
+        } else {
+             alert('Erro ao realizar cadastro. Tente novamente.');
+        }
       }
     });
   }

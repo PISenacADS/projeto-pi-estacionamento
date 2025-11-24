@@ -7,43 +7,41 @@
 
   <div class="usuario-info">
     <h1 class="usuario">Usuário</h1>
-   <ul class="Nomesobre">
-  <li>
-    <label>Nome</label><br />
-    <input type="text" formControlName="nome" placeholder="Nome" class="usu"/>
-    <div *ngIf="cadastroForm.get('nome')?.touched && cadastroForm.get('nome')?.invalid" class="error">
-      Nome é obrigatório e deve ter no mínimo 3 caracteres.
-    </div>
-  </li>
+    <ul class="Nomesobre">
+      <li>
+        <label>Nome</label><br />
+        <input type="text" formControlName="nome" placeholder="Seu Nome Completo" class="usu"/>
+        <div *ngIf="cadastroForm.get('nome')?.touched && cadastroForm.get('nome')?.invalid" class="error">
+          Nome é obrigatório (mín. 3 letras).
+        </div>
+      </li>
 
-  <li>
-    <label>Telefone</label><br />
-    <input type="text" formControlName="telefone" placeholder="(55)99999-9999" class="usu"/>
-    <div *ngIf="cadastroForm.get('telefone')?.touched && cadastroForm.get('telefone')?.invalid" class="error">
-      Telefone é obrigatório.
-    </div>
-  </li>
+      <li>
+        <label>Telefone</label><br />
+        <input type="text" formControlName="telefone" placeholder="(XX) 99999-9999" class="usu"/>
+        <div *ngIf="cadastroForm.get('telefone')?.touched && cadastroForm.get('telefone')?.invalid" class="error">
+          Telefone é obrigatório.
+        </div>
+      </li>
 
-  <li>
-    <label>E-mail</label><br />
-    <input type="email" formControlName="email" placeholder="email@exemplo.com" class="usu"/>
-    <div *ngIf="cadastroForm.get('email')?.touched && cadastroForm.get('email')?.invalid" class="error">
-      E-mail inválido ou obrigatório.
-    </div>
-  </li>
+      <li>
+        <label>E-mail</label><br />
+        <input type="email" formControlName="email" placeholder="email@exemplo.com" class="usu"/>
+        <div *ngIf="cadastroForm.get('email')?.touched && cadastroForm.get('email')?.invalid" class="error">
+          Insira um e-mail válido.
+        </div>
+      </li>
 
-  <li>
-    <label>Senha</label><br />
-    <input type="password" formControlName="senha" placeholder="********" class="usu"/>
-    <div *ngIf="cadastroForm.get('senha')?.touched && cadastroForm.get('senha')?.invalid" class="error">
-      Senha é obrigatória (mínimo 6 caracteres).
-    </div>
-  </li>
-</ul>
-
+      <li>
+        <label>Senha</label><br />
+        <input type="password" formControlName="senha" placeholder="********" class="usu"/>
+        <div *ngIf="cadastroForm.get('senha')?.touched && cadastroForm.get('senha')?.invalid" class="error">
+          Senha obrigatória (mín. 6 caracteres).
+        </div>
+      </li>
+    </ul>
   </div>
 
-  <!-- Veículo -->
   <h1 class="Automovel">Automóvel</h1>
   <div class="veiculo-info">
     <div class="form-grid">
@@ -54,19 +52,21 @@
 
       <div class="grupo-auto">
         <label>Modelo</label>
-        <input type="text" formControlName="modelo" placeholder="Carro, Moto..."/>
+        <input type="text" formControlName="modelo" placeholder="Ex: Gol, Onix..."/>
       </div>
 
       <div class="grupo-auto">
         <label>Cor</label>
         <select formControlName="cor">
           <option value="">Selecione</option>
-          <option value="preto">Preto</option>
-          <option value="branco">Branco</option>
-          <option value="vermelho">Vermelho</option>
-          <option value="cinza">Cinza</option>
-          <option value="prata">Prata</option>
-          <option value="amarelo">Amarelo</option>
+          
+          <option value="black">Preto</option>
+          <option value="white">Branco</option>
+          <option value="red">Vermelho</option>
+          <option value="gray">Cinza</option>
+          <option value="silver">Prata</option>
+          <option value="yellow">Amarelo</option>
+          <option value="blue">Azul</option>
         </select>
       </div>
     </div>
