@@ -2,7 +2,6 @@ package com.example.demo.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -26,28 +25,22 @@ public class SecurityConfig {
             .csrf(AbstractHttpConfigurer::disable)
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
-                // --- ZONA LIVRE (Para não travar sua apresentação) ---
                 
-                // Autenticação
                 .requestMatchers("/api/auth/**").permitAll()
                 
-                // Cadastros Básicos (GET e POST)
                 .requestMatchers("/api/usuarios/**").permitAll()
                 .requestMatchers("/api/veiculos/**").permitAll()
                 
-                // Funcionalidades (Reserva, Movimentação, Pagamento)
                 .requestMatchers("/api/reservas/**").permitAll()
                 .requestMatchers("/api/movimentacoes/**").permitAll()
                 .requestMatchers("/api/pagamentos/**").permitAll()
                 
-                // Dashboard Financeiro
+                .requestMatchers("/api/dashboard/**").permitAll()
                 .requestMatchers("/api/financeiro/**").permitAll()
                 
-                // Swagger e Erros
                 .requestMatchers("/error").permitAll()
                 .requestMatchers("/v3/api-docs/**", "/swagger-ui/**").permitAll()
                 
-                // Se sobrar algo, exige autenticação (mas cobrimos quase tudo acima)
                 .anyRequest().authenticated()
             );
 
