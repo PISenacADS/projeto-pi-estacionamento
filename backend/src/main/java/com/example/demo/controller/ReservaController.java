@@ -25,8 +25,18 @@ public class ReservaController {
         return reservaService.buscarPorId(id);
     }
 
+    @GetMapping("/usuario/{usuarioId}")
+    public List<Reserva> listarPorUsuario(@PathVariable Long usuarioId) {
+        return reservaService.listarPorUsuario(usuarioId);
+    }
+
     @PostMapping
     public Reserva criarReserva(@RequestBody Reserva reserva) {
         return reservaService.criarReserva(reserva);
+    }
+
+     @PutMapping("/{id}/prolongar")
+    public Reserva prolongarReserva(@PathVariable Long id) {
+        return reservaService.prolongarReserva(id);
     }
 }

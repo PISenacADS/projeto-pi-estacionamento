@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="reservaAtiva; else semReserva">
 
     <div class="left">
         <h1>Temporizador</h1>
@@ -13,23 +13,37 @@
                     </linearGradient>
                 </defs>
                 <circle class="timer-bg" cx="50" cy="50" r="45"></circle>
-                <circle class="timer-progress" cx="50" cy="50" r="45"></circle>
+                <circle class="timer-progress" cx="50" cy="50" r="45"
+                        [style.stroke-dashoffset]="dashOffset">
+                </circle>
             </svg>
-            <div class="timer-time">{{ tempoExibido }}</div>
+            <div class="timer-time" [class.small-font]="fontePequena">
+                {{ tempoExibido }}
+            </div>
+            
             <p class="timer-text">{{ textoAte }}</p>
         </div>
 
-        <button class="btn btn-prolongar" (click)="prolongarTempo()">
+        <button class="btn btn-prolongar" (click)="prolongarTempo()" 
+                [disabled]="textoBotao !== 'PROLONGAR +'">
             {{ textoBotao }}
         </button>
     </div>
 
     <div class="right">
         <h2>VEÍCULO</h2>
-        <p><strong>Placa:</strong> {{ detalhesVeiculo.placa }}</p>
-        <p><strong>Tempo:</strong> {{ detalhesVeiculo.tempo }}</p>
-        <p><strong>Data/Hora:</strong> {{ detalhesVeiculo.dataHora }}</p>
-        <p><strong>Autorização:</strong> {{ detalhesVeiculo.autorizacao }}</p>
-        <p><strong>Localidade:</strong> {{ detalhesVeiculo.localidade }}</p>
+        <p><strong>Placa:</strong> {{ reservaAtiva?.veiculo?.placa }}</p>
+        <p><strong>Modelo:</strong> {{ reservaAtiva?.veiculo?.modelo }}</p>
+        <p><strong>Entrada:</strong> {{ reservaAtiva?.dataEntrada | date:'dd/MM HH:mm' }}</p>
+        <p><strong>Valor Atual:</strong> {{ reservaAtiva?.valorTotal | currency:'BRL' }}</p>
+        <p><strong>Localidade:</strong> Aeroporto de Congonhas</p>
     </div>
 </div>
+
+<ng-template #semReserva>
+    <div class="container" style="flex-direction: column; text-align: center;">
+        <h1 style="margin: 0;">Nenhuma reserva ativa</h1>
+        <p style="font-size: 1.2rem; margin-top: 20px;">Faça uma reserva para ver o temporizador.</p>
+        <button class="btn" routerLink="/usuario/reserva">Reservar Agora</button>
+    </div>
+</ng-template>
