@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'; // Necessário para usar ngModel
+import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Router, RouterModule } from '@angular/router';
 import { PerfilService } from '../perfil/services/perfil.service';
@@ -36,7 +36,6 @@ export class ReservaComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    
     const hoje = new Date();
     this.dataEntrada = hoje.toISOString().split('T')[0];
     this.dataSaida = hoje.toISOString().split('T')[0];
@@ -50,11 +49,8 @@ export class ReservaComponent implements OnInit {
       this.perfilService.getDadosUsuario(email).subscribe({
         next: (dados) => {
           this.usuarioId = dados.id;
-          this.meusVeiculos = dados.veiculos || [];
           
-          if (this.meusVeiculos.length > 0) {
-            this.veiculoSelecionadoId = this.meusVeiculos[0].id;
-          }
+          this.buscarMeusVeiculos(dados.id);
           
           this.calcularPreco(); 
           this.cdr.detectChanges();
@@ -62,6 +58,23 @@ export class ReservaComponent implements OnInit {
         error: (err) => console.error("Erro usuario", err)
       });
     }
+  }
+
+  buscarMeusVeiculos(id: number) {
+    this.http.get<any[]>(`http://localhost:8080/api/veiculos/usuario/${id}`)
+      .subscribe({
+        next: (carros) => {
+          console.log("Veículos carregados na reserva:", carros);
+          this.meusVeiculos = carros || [];
+
+          if (this.meusVeiculos.length > 0) {
+            this.veiculoSelecionadoId = this.meusVeiculos[0].id;
+          }
+
+          this.cdr.detectChanges();
+        },
+        error: (err) => console.error("Erro ao buscar veículos", err)
+      });
   }
 
   calcularPreco() {
@@ -107,11 +120,11 @@ export class ReservaComponent implements OnInit {
         },
         error: (err) => {
           console.error(err);
-         
+          
           if (err.error && err.error.message) {
              alert("Erro: " + err.error.message);
           } else {
-             alert("Algo deu errado :/");
+             alert("Erro ao reservar. Verifique se há vagas disponíveis.");
           }
         }
       });

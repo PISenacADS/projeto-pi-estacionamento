@@ -35,13 +35,12 @@ export class HomeComponent implements OnInit {
     if (email) {
       this.perfilService.getDadosUsuario(email).subscribe({
         next: (dados) => {
-          console.log("Dados Completos do Usuário:", dados);
+          console.log("Dados do Usuário:", dados);
           
           this.usuarioNome = dados.nome;
-
           this.saldoUsuario = dados.saldo || 0;
 
-          this.listaVeiculos = dados.veiculos || [];
+          this.buscarMeusVeiculos(dados.id);
 
           this.buscarMovimentacoes(dados.id);
           
@@ -54,6 +53,21 @@ export class HomeComponent implements OnInit {
         }
       });
     }
+  }
+
+  buscarMeusVeiculos(usuarioId: number) {
+    this.http.get<any[]>(`http://localhost:8080/api/veiculos/usuario/${usuarioId}`)
+      .subscribe({
+        next: (carros) => {
+          this.listaVeiculos = carros;
+          this.cdr.detectChanges();
+        },
+        error: (err) => {
+          console.error('Erro ao buscar veículos', err);
+          this.listaVeiculos = [];
+          this.cdr.detectChanges();
+        }
+      });
   }
 
   buscarMovimentacoes(usuarioId: number) {

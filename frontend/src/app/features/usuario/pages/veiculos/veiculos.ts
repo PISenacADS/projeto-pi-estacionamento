@@ -37,7 +37,7 @@ export class VeiculosComponent implements OnInit {
         next: (dados) => {
           this.usuarioNome = dados.nome;
           
-          this.listaVeiculos = dados.veiculos || [];
+          this.buscarMeusVeiculos(dados.id);
           
           this.buscarMovimentacoes(dados.id);
           
@@ -46,6 +46,21 @@ export class VeiculosComponent implements OnInit {
         error: (err) => console.error(err)
       });
     }
+  }
+
+  buscarMeusVeiculos(id: number) {
+    this.http.get<any[]>(`http://localhost:8080/api/veiculos/usuario/${id}`)
+      .subscribe({
+        next: (carros) => {
+          console.log("Veículos carregados na tela de veículos:", carros);
+          this.listaVeiculos = carros;
+          this.cdr.detectChanges();
+        },
+        error: (err) => {
+          console.error("Erro ao buscar veículos", err);
+          this.cdr.detectChanges();
+        }
+      });
   }
 
   buscarMovimentacoes(id: number) {
