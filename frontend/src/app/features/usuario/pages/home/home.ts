@@ -11,6 +11,7 @@ import { PerfilService } from '../perfil/services/perfil.service';
   templateUrl: './home.html',
   styleUrl: './home.scss'
 })
+
 export class HomeComponent implements OnInit {
 
   usuarioNome: string = 'Carregando...';
@@ -42,7 +43,7 @@ export class HomeComponent implements OnInit {
 
           this.buscarMeusVeiculos(dados.id);
 
-          this.buscarMovimentacoes(dados.id);
+          this.buscarReservasComoMovimentacoes(dados.id);
           
           this.cdr.detectChanges();
         },
@@ -70,14 +71,31 @@ export class HomeComponent implements OnInit {
       });
   }
 
-  buscarMovimentacoes(usuarioId: number) {
-    this.http.get<any[]>(`http://localhost:8080/api/movimentacoes/usuario/${usuarioId}`)
+  buscarReservasComoMovimentacoes(usuarioId: number) {
+    this.http.get<any[]>(`http://localhost:8080/api/reservas/usuario/${usuarioId}`)
       .subscribe({
-        next: (dados) => {
-          this.listaMovimentacoes = dados;
+        next: (reservas) => {
+          console.log("Reservas encontradas:", reservas);
+          
+          this.listaMovimentacoes = reservas.map(r => {
+            
+            const dataSaida = new Date(r.dataSaida);
+            const agora = new Date();
+            const estaAtiva = dataSaida > agora; 
+
+            return {
+              placa: r.veiculo ? r.veiculo.placa : '---', 
+              entrada: r.dataEntrada,
+              saida: r.dataSaida,
+              valor: r.valorTotal,
+              ativa: estaAtiva 
+            };
+          });
+
           this.cdr.detectChanges(); 
         },
-        error: () => {
+        error: (err) => {
+          console.error("Erro ao buscar reservas", err);
           this.listaMovimentacoes = []; 
           this.cdr.detectChanges();
         }
