@@ -24,6 +24,7 @@ export const routes: Routes = [
     component: AdminLayoutComponent,
     children: [
       { path: 'cadastro', component: CadastroComponent },
+      { path: 'cadastro/:id', component: CadastroComponent },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'usuario', component: UsuarioComponent },
       { path: 'financeiro', component: FinanceiroComponent },

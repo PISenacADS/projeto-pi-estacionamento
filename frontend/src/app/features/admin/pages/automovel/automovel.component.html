@@ -9,7 +9,6 @@
     <p>Carregando veículos...</p>
   </div>
 
-
   <div class="data-card" *ngIf="!isLoading && veiculos.length > 0">
     <table class="data-table">
       <thead>
@@ -18,7 +17,7 @@
           <th>Modelo</th>
           <th>Cor</th>
           <th>Situação</th>
-          <th>Ação</th>
+          <th>Ação</th> 
         </tr>
       </thead>
       <tbody>
@@ -27,12 +26,11 @@
           <td>{{ veiculo.modelo }}</td>
           
           <td>
-
             <div class="color-dot" [style.backgroundColor]="veiculo.cor.toLowerCase()"></div>
           </td>
           
-
           <td>
+            
             <span *ngIf="veiculo.situacao" class="material-icons icon-success" title="Ativo">
               check_circle
             </span>
@@ -43,13 +41,16 @@
           
           <td>
             <div class="actions">
-
-              <span class="material-icons icon-edit" title="Editar Veículo" [routerLink]="['/admin/cadastro-veiculo', veiculo.id]">
-                edit
-              </span>
-              <span class="material-icons icon-delete" title="Excluir Veículo" (click)="deletarVeiculo(veiculo.id!)">
-                delete_outline
-              </span>
+              <button class="status-btn" 
+                      [class.btn-block]="veiculo.situacao" 
+                      [class.btn-activate]="!veiculo.situacao"
+                      (click)="alternarSituacao(veiculo)">
+                
+                <span class="material-icons">
+                  {{ veiculo.situacao ? 'block' : 'autorenew' }}
+                </span>
+                {{ veiculo.situacao ? 'Desativar' : 'Ativar' }}
+              </button>
             </div>
           </td>
         </tr>

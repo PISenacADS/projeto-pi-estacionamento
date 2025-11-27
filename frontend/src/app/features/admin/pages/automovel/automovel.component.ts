@@ -41,11 +41,25 @@ export class AutomovelComponent implements OnInit {
     });
   }
 
-  public deletarVeiculo(id: number): void {
-    if (confirm('Tem certeza que deseja excluir este veículo?')) {
-      this.veiculoService.removerVeiculo(id).subscribe(() => {
-        alert('Veículo removido com sucesso!');
-        this.carregarVeiculos(); 
+  public alternarSituacao(veiculo: Veiculo): void {
+    if (!veiculo.id) return;
+
+    const acao = veiculo.situacao ? 'desativar' : 'ativar';
+
+    if (confirm(`Deseja realmente ${acao} este veículo?`)) {
+      this.veiculoService.trocarSituacao(veiculo.id).subscribe({
+        next: (veiculoAtualizado) => {
+          const index = this.veiculos.findIndex(v => v.id === veiculoAtualizado.id);
+          if (index !== -1) {
+            this.veiculos[index] = veiculoAtualizado;
+            this.cdr.markForCheck(); 
+          }
+          alert(`Veículo ${acao === 'ativar' ? 'ativado' : 'desativado'} com sucesso!`);
+        },
+        error: (err) => {
+          console.error(err);
+          alert('Erro ao alterar situação do veículo.');
+        }
       });
     }
   }

@@ -63,4 +63,13 @@ public class VeiculoService {
         }
         return false;
     }
+
+    public Veiculo trocarSituacao(Long id) {
+        Veiculo veiculo = veiculoRepository.findById(id).orElse(null);
+        if (veiculo != null) {
+            veiculo.setSituacao(!veiculo.isSituacao());
+            return veiculoRepository.save(veiculo);
+        }
+        return null;
+    }
 }

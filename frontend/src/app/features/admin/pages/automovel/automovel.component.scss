@@ -1,11 +1,10 @@
-/* Configurações globais da página */
+
 :host {
   display: block;
   padding: 24px;
   min-height: 100vh;
 }
 
-/* Título "Automóvel" */
 .titulo {
   font-family: Arial, sans-serif;
   font-size: 32px;
@@ -14,7 +13,6 @@
   margin-bottom: 20px;
 }
 
-/* Linha superior com Título e Botão */
 .top-row {
   display: flex;
   justify-content: space-between;
@@ -22,9 +20,8 @@
   margin-bottom: 20px;
 }
 
-/* Botão "Adicionar" */
 .add-button {
-  background-color: #5b3e94; // Roxo
+  background-color: #5b3e94; 
   color: white;
   border: none;
   padding: 10px 20px;
@@ -122,4 +119,32 @@
   padding: 40px;
   font-size: 16px;
   color: #777;
+}
+
+.status-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: white;
+  transition: background 0.3s;
+
+  .material-icons {
+    font-size: 18px;
+  }
+
+  &.btn-block {
+    background-color: #e74c3c;
+    &:hover { background-color: #c0392b; }
+  }
+
+  &.btn-activate {
+    background-color: #27ae60;
+    &:hover { background-color: #2ecc71; }
+  }
 }

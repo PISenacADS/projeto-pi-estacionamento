@@ -1,7 +1,8 @@
-<form [formGroup]="cadastroForm" (ngSubmit)="cadastrar()" class="usuario-box-1">
+<form [formGroup]="cadastroForm" (ngSubmit)="salvar()" class="usuario-box-1">
 
   <header class="header">
-    <h1>CADASTRO</h1>
+   
+    <h1>{{ isEdicao ? 'EDITAR USUÁRIO' : 'CADASTRO' }}</h1>
     <span></span>
   </header>
 
@@ -11,33 +12,21 @@
       <li>
         <label>Nome</label><br />
         <input type="text" formControlName="nome" placeholder="Seu Nome Completo" class="usu"/>
-        <div *ngIf="cadastroForm.get('nome')?.touched && cadastroForm.get('nome')?.invalid" class="error">
-          Nome é obrigatório (mín. 3 letras).
-        </div>
       </li>
 
       <li>
         <label>Telefone</label><br />
         <input type="text" formControlName="telefone" placeholder="(XX) 99999-9999" class="usu"/>
-        <div *ngIf="cadastroForm.get('telefone')?.touched && cadastroForm.get('telefone')?.invalid" class="error">
-          Telefone é obrigatório.
-        </div>
       </li>
 
       <li>
         <label>E-mail</label><br />
         <input type="email" formControlName="email" placeholder="email@exemplo.com" class="usu"/>
-        <div *ngIf="cadastroForm.get('email')?.touched && cadastroForm.get('email')?.invalid" class="error">
-          Insira um e-mail válido.
-        </div>
       </li>
 
       <li>
-        <label>Senha</label><br />
+        <label>Senha {{ isEdicao ? '(Opcional)' : '' }}</label><br />
         <input type="password" formControlName="senha" placeholder="********" class="usu"/>
-        <div *ngIf="cadastroForm.get('senha')?.touched && cadastroForm.get('senha')?.invalid" class="error">
-          Senha obrigatória (mín. 6 caracteres).
-        </div>
       </li>
     </ul>
   </div>
@@ -59,7 +48,6 @@
         <label>Cor</label>
         <select formControlName="cor">
           <option value="">Selecione</option>
-          
           <option value="black">Preto</option>
           <option value="white">Branco</option>
           <option value="red">Vermelho</option>
@@ -72,5 +60,7 @@
     </div>
   </div>
 
-  <button type="submit" class="bot-cadastrar">Cadastrar</button>
+  <button type="submit" class="bot-cadastrar">
+    {{ isEdicao ? 'Salvar Alterações' : 'Cadastrar' }}
+  </button>
 </form>

@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -56,5 +57,14 @@ public class VeiculoController {
     public String removerVeiculo(@PathVariable Long id) {
         boolean removido = veiculoService.removerVeiculo(id);
         return removido ? "Veículo removido com sucesso!" : "Veículo não encontrado.";
+    }
+
+     @PutMapping("/{id}/situacao")
+    public ResponseEntity<Veiculo> trocarSituacao(@PathVariable Long id) {
+        Veiculo veiculoAtualizado = veiculoService.trocarSituacao(id);
+        if (veiculoAtualizado != null) {
+            return ResponseEntity.ok(veiculoAtualizado);
+        }
+        return ResponseEntity.notFound().build();
     }
 }
