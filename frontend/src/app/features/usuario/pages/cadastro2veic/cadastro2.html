@@ -26,15 +26,23 @@
             placeholder="Ex: ABC-1234">
         </div>
 
+        <div class="form-group">
         <div class="input-box">
-          <label for="cor">Cor (em inglês para o sistema):</label>
-
-          <input 
-            type="text" 
-            id="cor" 
-            formControlName="cor" 
-            placeholder="Ex: black, white, red...">
+          <label for="cor">Cor</label>
+          <select id="cor" formControlName="cor" class="custom-select">
+            <option value="">Selecione</option>
+            <option value="black">Preto</option>
+            <option value="white">Branco</option>
+            <option value="red">Vermelho</option>
+            <option value="gray">Cinza</option>
+            <option value="silver">Prata</option>
+            <option value="yellow">Amarelo</option>
+            <option value="blue">Azul</option>
+          </select>
         </div>
+        <!-- Espaço vazio para alinhar grid se necessário -->
+        <div class="input-box"></div> 
+      </div>
       </div>
 
       <div class="button-container">

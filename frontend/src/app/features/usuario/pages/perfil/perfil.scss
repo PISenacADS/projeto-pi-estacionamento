@@ -7,7 +7,6 @@
    
 }
 
-/* --- Blocos (Topo, Pessoais, Veículos) --- */
 .header-block, .info-block {
     background-color: var(--block-bg-color);
     padding: 20px;
@@ -119,7 +118,6 @@
     font-weight: 400;
 }
 
-/* --- Meus Veículos (Bloco e Itens) --- */
 
 .info-block:nth-child(3) {
      display: flex;
@@ -159,7 +157,6 @@
     font-size: 1em;
 }
 
-/* --- Status Badges --- */
 .status-badge {
     display: flex;
     align-items: center;
@@ -183,33 +180,44 @@
     margin-right: 5px;
 }
 
-/* --- NOVO CONTÊINER PARA CENTRALIZAR O BOTÃO --- */
 .button-container {
-    width: 100%; 
-    margin-top: 20px; 
-    
-    /* Regras de Centralização */
+    width: 100%;
+    margin-top: 20px;
     display: flex;
-    justify-content: center; 
+    justify-content: center;
 }
 
-/* Botão */
 .add-vehicle-button {
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
     width: 44%;
-    max-width: 310px; 
-    padding: 12px; 
-    background-color: var(--button-color); 
+    max-width: 310px;
+    min-width: 200px;
+    
+    padding: 14px 20px; 
+    
+    background-color: var(--button-color);
     color: white;
+    
     border: none;
-    border-radius: 6px; 
+    border-radius: 6px;
+    
     font-size: 1em;
-    font-weight: 400;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    font-weight: 600; 
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    text-decoration: none; 
+    white-space: nowrap;
+    
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .add-vehicle-button:hover {
-    background-color: #4A35B3; 
+    background-color: #4A35B3;
+    transform: translateY(-2px); 
 }
