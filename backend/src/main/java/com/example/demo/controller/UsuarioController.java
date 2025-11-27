@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
@@ -20,8 +21,12 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Usuario> buscarPorId(@PathVariable Long id) {
-        return usuarioService.buscarPorId(id);
+    public ResponseEntity<Usuario> buscar(@PathVariable Long id) {
+        Usuario usuario = usuarioService.buscarPorId(id);
+        if (usuario != null) {
+            return ResponseEntity.ok(usuario);
+        }
+        return ResponseEntity.notFound().build();
     }
 
     @GetMapping("/email")
