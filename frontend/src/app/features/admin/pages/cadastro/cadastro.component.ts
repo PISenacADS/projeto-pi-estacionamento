@@ -128,7 +128,7 @@ export class CadastroComponent implements OnInit {
           this.cadastroService.atualizarVeiculo(this.idVeiculo, dadosVeiculo).subscribe({
             next: () => {
               alert('Dados atualizados com sucesso!');
-              this.router.navigate(['/admin/usuarios']);
+              this.router.navigate(['/admin/dashboard']);
             }
           });
         } else {
