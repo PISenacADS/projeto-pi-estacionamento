@@ -23,6 +23,7 @@ export class ReservaComponent implements OnInit {
   veiculoSelecionadoId: number | null = null;
 
   usuarioId: number | null = null;
+  saldoUsuario: number = 0; 
   meusVeiculos: any[] = [];
   
   valorTotal: number = 0;
@@ -50,8 +51,9 @@ export class ReservaComponent implements OnInit {
         next: (dados) => {
           this.usuarioId = dados.id;
           
+          this.saldoUsuario = dados.saldo || 0;
+
           this.buscarMeusVeiculos(dados.id);
-          
           this.calcularPreco(); 
           this.cdr.detectChanges();
         },
@@ -64,53 +66,88 @@ export class ReservaComponent implements OnInit {
     this.http.get<any[]>(`http://localhost:8080/api/veiculos/usuario/${id}`)
       .subscribe({
         next: (carros) => {
-          console.log("Veículos carregados na reserva:", carros);
           this.meusVeiculos = carros || [];
-
+          
           if (this.meusVeiculos.length > 0) {
             this.veiculoSelecionadoId = this.meusVeiculos[0].id;
           }
-
           this.cdr.detectChanges();
         },
         error: (err) => console.error("Erro ao buscar veículos", err)
       });
   }
 
+  criarDataComHora(dataStr: string, horaStr: string): Date {
+    if (!dataStr || !horaStr) return new Date();
+    const partesData = dataStr.split('-');
+    const partesHora = horaStr.split(':'); 
+    
+    return new Date(
+      parseInt(partesData[0]),
+      parseInt(partesData[1]) - 1, 
+      parseInt(partesData[2]),
+      parseInt(partesHora[0]),
+      parseInt(partesHora[1])
+    );
+  }
+
   calcularPreco() {
     if (!this.dataEntrada || !this.dataSaida) return;
 
-    const inicio = new Date(`${this.dataEntrada}T${this.horaEntrada}`);
-    const fim = new Date(`${this.dataSaida}T${this.horaSaida}`);
+    const inicio = this.criarDataComHora(this.dataEntrada, this.horaEntrada);
+    const fim = this.criarDataComHora(this.dataSaida, this.horaSaida);
+
+    if (fim <= inicio) {
+        this.valorTotal = 0;
+        this.tempoTotalHoras = 0;
+        return;
+    }
 
     let diffMs = fim.getTime() - inicio.getTime();
-    
     let horas = Math.ceil(diffMs / (1000 * 60 * 60));
     if (horas < 1) horas = 1;
-    this.tempoTotalHoras = horas;
-
-    const precoHora = this.tipoVaga === 1 ? 5.00 : 8.00;
     
+    this.tempoTotalHoras = horas;
+    const precoHora = this.tipoVaga === 1 ? 5.00 : 8.00;
     this.valorTotal = horas * precoHora;
   }
 
   solicitarReserva() {
+   
     if (!this.usuarioId || !this.veiculoSelecionadoId) {
       alert("Selecione um veículo!");
       return;
+    }
+
+    const agora = new Date();
+    const dataInicioReserva = this.criarDataComHora(this.dataEntrada, this.horaEntrada);
+    const dataFimReserva = this.criarDataComHora(this.dataSaida, this.horaSaida);
+
+    if (dataInicioReserva.getTime() < (agora.getTime() - 60000)) {
+        alert("⚠️ A data/hora de entrada não pode ser no passado. Escolha um horário futuro.");
+        return;
+    }
+
+    if (dataFimReserva <= dataInicioReserva) {
+        alert("⚠️ A data de saída deve ser maior que a data de entrada.");
+        return;
+    }
+
+    if (this.valorTotal > this.saldoUsuario) {
+        alert(`⚠️ Saldo insuficiente!\nVocê tem: R$ ${this.saldoUsuario.toFixed(2)}\nNecessário: R$ ${this.valorTotal.toFixed(2)}\n\nVá em 'Adicionar Saldo' na Home.`);
+        return;
     }
 
     const reservaJSON = {
       dataEntrada: `${this.dataEntrada}T${this.horaEntrada}:00`,
       dataSaida: `${this.dataSaida}T${this.horaSaida}:00`,
       valorTotal: this.valorTotal,
-      
       usuario: { id: this.usuarioId },
       veiculo: { id: this.veiculoSelecionadoId },
       vaga: { id: this.tipoVaga } 
     };
 
-    console.log("Enviando:", reservaJSON);
+    console.log("Enviando Reserva:", reservaJSON);
 
     this.http.post('http://localhost:8080/api/reservas', reservaJSON)
       .subscribe({
@@ -120,7 +157,6 @@ export class ReservaComponent implements OnInit {
         },
         error: (err) => {
           console.error(err);
-          
           if (err.error && err.error.message) {
              alert("Erro: " + err.error.message);
           } else {

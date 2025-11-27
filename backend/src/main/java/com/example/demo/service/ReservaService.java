@@ -4,6 +4,7 @@ import com.example.demo.model.*;
 import com.example.demo.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Duration;
 import java.util.List;
@@ -17,6 +18,8 @@ public class ReservaService {
     @Autowired
     private VagaRepository vagaRepository;
 
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     public List<Reserva> listarTodas() {
         return reservaRepository.findAll();
@@ -31,8 +34,9 @@ public class ReservaService {
         return reservaRepository.findByUsuarioIdOrderByDataEntradaDesc(usuarioId);
     }
 
-
+    @Transactional 
     public Reserva criarReserva(Reserva reserva) {
+        
         Vaga vaga = vagaRepository.findById(reserva.getVaga().getId())
                 .orElseThrow(() -> new RuntimeException("Vaga não encontrada"));
 
@@ -46,14 +50,24 @@ public class ReservaService {
         double valor = horas * vaga.getPrecoHora();
         reserva.setValorTotal(valor);
 
+        Usuario usuario = usuarioRepository.findById(reserva.getUsuario().getId())
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+
+        if (usuario.getSaldo() < valor) {
+            throw new RuntimeException("Saldo insuficiente para realizar a reserva.");
+        }
+
+        usuario.setSaldo(usuario.getSaldo() - valor);
+        usuarioRepository.save(usuario);
+
         vaga.setDisponivel(vaga.getDisponivel() - 1);
         vagaRepository.save(vaga);
 
         return reservaRepository.save(reserva);
     }
 
+    @Transactional
     public Reserva prolongarReserva(Long id) {
-      
         Reserva reserva = reservaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Reserva não encontrada"));
 
@@ -61,7 +75,6 @@ public class ReservaService {
 
         if (reserva.getVaga() != null) {
             Double precoHora = reserva.getVaga().getPrecoHora();
-           
             if (precoHora == null) precoHora = 5.0; 
             
             reserva.setValorTotal(reserva.getValorTotal() + precoHora);

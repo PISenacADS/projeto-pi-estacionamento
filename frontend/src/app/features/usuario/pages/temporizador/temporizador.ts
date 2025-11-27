@@ -22,9 +22,9 @@ export class TemporizadorComponent implements OnInit, OnDestroy {
 
   public reservaAtiva: any = null;
   private intervaloId: any;
-
-  // Variável para controlar classe CSS de fonte pequena
   public fontePequena: boolean = false; 
+
+  public qtdReservasAtivas: number = 0;
 
   constructor(
     private http: HttpClient,
@@ -59,12 +59,25 @@ export class TemporizadorComponent implements OnInit, OnDestroy {
     this.http.get<any[]>(`http://localhost:8080/api/reservas/usuario/${usuarioId}`)
       .subscribe({
         next: (reservas) => {
-          if (reservas && reservas.length > 0) {
-            this.reservaAtiva = reservas[0]; 
+          
+          const agora = new Date();
+
+          const reservasValidas = reservas.filter(r => new Date(r.dataSaida).getTime() > agora.getTime());
+
+          this.qtdReservasAtivas = reservasValidas.length;
+
+          if (reservasValidas.length > 0) {
+            
+            reservasValidas.sort((a, b) => {
+              return new Date(a.dataEntrada).getTime() - new Date(b.dataEntrada).getTime();
+            });
+
+            this.reservaAtiva = reservasValidas[0]; 
+            
             this.iniciarContagem();
             this.cdr.detectChanges(); 
           } else {
-            alert("Você não possui reservas ativas. Redirecionando...");
+            alert("Você não possui reservas ativas no momento. Redirecionando...");
             this.router.navigate(['/usuario/reserva']);
           }
         },
@@ -98,18 +111,17 @@ export class TemporizadorComponent implements OnInit, OnDestroy {
         this.dashOffset = 283;
         this.textoAte = "Tempo Esgotado!";
         clearInterval(this.intervaloId);
-      } else {
         
+      } else {
         const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
         const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
         const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
+
         if (dias > 0) {
-          
           this.tempoExibido = `${dias}d ${horas}h ${minutos}m`;
           this.fontePequena = true; 
         } else {
-          
           this.tempoExibido = `${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
           this.fontePequena = false;
         }
@@ -132,7 +144,7 @@ export class TemporizadorComponent implements OnInit, OnDestroy {
     this.http.put(`http://localhost:8080/api/reservas/${this.reservaAtiva.id}/prolongar`, {})
       .subscribe({
         next: (reservaAtualizada: any) => {
-          alert('+1 Hora adicionada.');
+          alert('Sucesso! +1 Hora adicionada.');
           this.reservaAtiva = reservaAtualizada;
           this.iniciarContagem();
           this.textoBotao = 'PROLONGAR +';
