@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "pagamentos")
-// Esta linha evita erros com FetchType.LAZY
+
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Pagamento {
 
@@ -40,6 +40,6 @@ public class Pagamento {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_id", nullable = false)
-    @JsonIgnore // <--- OBRIGATÓRIO: Corta o loop infinito aqui
+    @JsonIgnore 
     private Usuario usuario;
 }

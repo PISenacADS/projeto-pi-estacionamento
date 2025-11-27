@@ -128,12 +128,12 @@ export class CadastroComponent implements OnInit {
           this.cadastroService.atualizarVeiculo(this.idVeiculo, dadosVeiculo).subscribe({
             next: () => {
               alert('Dados atualizados com sucesso!');
-              this.router.navigate(['/admin/dashboard']);
+              this.router.navigate(['/admin/usuario']);
             }
           });
         } else {
           alert('Usuário atualizado com sucesso!');
-          this.router.navigate(['/admin/usuarios']);
+          this.router.navigate(['/admin/usuario']);
         }
       },
       error: (err) => {
@@ -171,7 +171,7 @@ export class CadastroComponent implements OnInit {
         this.cadastroService.cadastrarVeiculo(veiculoParaSalvar).subscribe({
           next: () => {
             alert('Cadastro realizado!');
-            this.router.navigate(['/admin/usuarios']); 
+            this.router.navigate(['/admin/usuario']); 
           },
           error: () => alert('Usuário criado, mas erro ao salvar veículo.')
         });

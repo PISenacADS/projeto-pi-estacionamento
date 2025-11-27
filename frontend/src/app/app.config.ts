@@ -1,6 +1,5 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection } from '@angular/core';
 
-// 1. IMPORTE 'withRouterConfig'
 import { provideRouter, withRouterConfig } from '@angular/router';
 
 import { routes } from './app.routes';

@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-// ... (imports)
 import com.example.demo.model.Usuario;
 import com.example.demo.repository.UsuarioRepository;
 import com.example.demo.security.JwtService;
@@ -19,13 +18,11 @@ public class AuthService {
     @Autowired
     private JwtService jwtService;
 
-    // Lógica de registro (correta)
     public Usuario registrar(Usuario usuario) {
         usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
         return usuarioRepository.save(usuario);
     }
 
-    // Lógica de login (correta)
     public Map<String, Object> login(String email, String senha) {
         Usuario usuario = usuarioRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));

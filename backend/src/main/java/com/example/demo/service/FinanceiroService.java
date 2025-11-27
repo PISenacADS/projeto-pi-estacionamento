@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @Service
@@ -17,39 +18,34 @@ public class FinanceiroService {
 
     public Double calcularReceitaHoje() {
         LocalDateTime inicio = LocalDate.now().atStartOfDay();
-        LocalDateTime fim = LocalDate.now().atTime(23, 59, 59);
+        LocalDateTime fim = LocalDate.now().atTime(LocalTime.MAX); 
 
-        return pagamentoRepository.findByDataPagamentoBetween(inicio, fim)
-                .stream()
-                .mapToDouble(p -> p.getValor().doubleValue())
-                .sum();
+        return pagamentoRepository.somarReceitaPorPeriodo(inicio, fim);
     }
 
     public Double calcularReceitaSemanal() {
         LocalDateTime inicio = LocalDate.now().minusDays(7).atStartOfDay();
-        LocalDateTime fim = LocalDate.now().atTime(23, 59, 59);
+        LocalDateTime fim = LocalDate.now().atTime(LocalTime.MAX);
 
-        return pagamentoRepository.findByDataPagamentoBetween(inicio, fim)
-                .stream()
-                .mapToDouble(p -> p.getValor().doubleValue())
-                .sum();
+        return pagamentoRepository.somarReceitaPorPeriodo(inicio, fim);
     }
 
     public Double calcularReceitaMensal() {
-        LocalDateTime inicio = LocalDate.now().minusDays(30).atStartOfDay();
-        LocalDateTime fim = LocalDate.now().atTime(23, 59, 59);
+        LocalDateTime inicio = LocalDate.now().withDayOfMonth(1).atStartOfDay(); 
+        LocalDateTime fim = LocalDate.now().atTime(LocalTime.MAX);
 
-        return pagamentoRepository.findByDataPagamentoBetween(inicio, fim)
-                .stream()
-                .mapToDouble(p -> p.getValor().doubleValue())
-                .sum();
+        return pagamentoRepository.somarReceitaPorPeriodo(inicio, fim);
     }
 
     public List<Pagamento> listarPagamentosPendentes() {
+       
         return pagamentoRepository.findByStatus("Pendente");
     }
 
     public List<Pagamento> listarTodosPagamentos() {
-        return pagamentoRepository.findAll();
+        LocalDateTime trintaDiasAtras = LocalDateTime.now().minusDays(30);
+        LocalDateTime agora = LocalDateTime.now();
+      
+        return pagamentoRepository.findByDataPagamentoBetweenOrderByDataPagamentoDesc(trintaDiasAtras, agora);
     }
 }

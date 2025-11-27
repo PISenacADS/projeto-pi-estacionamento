@@ -2,7 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.model.Usuario;
 import com.example.demo.model.Veiculo;
-import com.example.demo.repository.UsuarioRepository; // IMPORTANTE
+import com.example.demo.repository.UsuarioRepository; 
 import com.example.demo.repository.VeiculoRepository; 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
